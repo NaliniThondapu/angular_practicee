@@ -1,0 +1,56 @@
+Events:
+    The change in the state of an object is known as an event.
+      To provide the interaction with UI, we need to implement events.
+      The process of reacting on events is called Event Handling.
+      Java Script handles the Html events via eventhandlers.
+
+  JS provides differnt types of events, such as onclick, onmouseover, onkeyup, onkeydown, oncopy, onpaste etc...
+    Events on element (html). Adding events dynamically on element while the code is being exectued
+
+Mouse Events:
+=======
+
+1. onclick --- when mouse click on an element
+2.  onmouseover -- when the cursor of the mouse comes over the element
+3.  onmouseout -- when the cursor of the mouse leaves an element
+4.  onmousedown -- when the mouse button is pressed over the element
+5.  onmouseup -- when the mouse button is releases over the element
+6.  onmousemove -- when the mouse movement takes place
+7.  ondbclick -- when the mouse double click on an element
+
+keyboardEvents
+=======
+
+1.  onkeydown & onkeyup -- when the user press and release the keyboardEvents
+
+Form Events
+==============
+1.  onfocus -- when the user focuses on an element
+2.  onsubmit -- when the user submits the Form
+3.  onblur -- when the focus is away from the form elements
+4.  onchange -- when the user change or modifies the value of a form element
+
+window/Document events
+=============
+
+1.  onload -- when the browser finishes the loading of the page
+2.  onunload -- when the visitor leaves the current page , the browser unloads it
+3.  onresize -- when the visitor resizes the window of the browser
+
+
+addEventListener()
+===========
+   This method is used to attach an event handler to a perticular element.
+syntax:
+========
+element.addEventListener(event, function, useCapture);  
+
+Event:
+    It is a required parameter. we need to specify the event name.
+function:
+   It is also a required parameter. It is javascript function name which needs to perform when an event occurs.
+useCapture:
+    The third parameter is optional.It is a Boolean type value that specifies whether the event is executed 
+    in the bubbling or capturing phase. It's possible values are true and false. 
+    When it is set to true, the event handler executes in the capturing phase.
+    When it is set to false, the handler executes in the bubbling phase. Its default value is false.

@@ -1,0 +1,27 @@
+<html>
+
+<head>
+    <h1>On Mouser Over Event</h1>
+
+</head>
+
+<body>
+    <img id="image" height="200" width="150"
+        src="C:\Nalini\angular_practice\angular_practicee\JavaScriptBasics\Events\MouseEvents\elena-mozhvilo-vGbkqyCRA1Q-unsplash.jpg" />
+
+    <script>
+        var imagge = document.getElementById("image");
+
+        imagge.onmouseover = function () {
+            imagge.style.height = "500"
+            imagge.style.width = "300"
+        }
+
+        imagge.onmouseout = function () {
+            imagge.style.height = "100"
+            imagge.style.width = "100"
+        }
+    </script>
+</body>
+
+</html>

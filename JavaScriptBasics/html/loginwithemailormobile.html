@@ -1,0 +1,40 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    EnterEmailOrMobile:<input type="text" id="emailormobile"></input>
+    <button id="submit" onclick="validateemailormobile()">Submit</button>
+    <div id="result-panel"></div>
+    <script>
+        function validateemailormobile() {
+            // Regular expression for email validation
+            const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+            // Regular expression for mobile number validation
+            const mobileRegex = /^\d{10}$/;
+
+            var resultPanel = document.getElementById("result-panel");
+            //clear the old result
+            resultPanel.innerHTML = ''
+            const resultElement = document.createElement('p')
+            const emailOrMobile = document.getElementById('emailormobile').value;
+            console.log("Email:" + emailOrMobile)
+            if (emailOrMobile == '') {
+                resultElement.textContent = "Enter Email or Mobile";
+            } else if (emailRegex.test(emailOrMobile)) {
+                resultElement.textContent = "Login successfully";
+            } else if (mobileRegex.test(emailOrMobile)) {
+                resultElement.textContent = "login successfully";
+            } else {
+                resultElement.textContent = "Invalid Credentials";
+            }
+            resultPanel.appendChild(resultElement)
+        }
+    </script>
+</body>
+
+
+</html>

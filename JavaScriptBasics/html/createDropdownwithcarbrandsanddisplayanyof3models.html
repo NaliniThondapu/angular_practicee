@@ -1,0 +1,44 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <label for="car-brand">Select a car Brand:</label>
+    <select id="carbrand" name="carbrand" onchange="displayCars()">
+        <option value="bmw">BMW</option>
+        <option value="kia">KIA</option>
+        <option value="audi">Audi</option>
+        <option value="ford">Ford</option>
+        <option value="mercedes">Mercedes</option>
+    </select>
+    <div id="cars-container"></div>
+
+    <script>
+        const cars = {
+            bmw: ['X3', 'X5', 'M5'],
+            kia: ['Seltos', 'Carnival', 'Sonet'],
+            audi: ['A4', 'A6', 'Q7'],
+            ford: ['Mustang', 'EcoSport', 'Endeavour'],
+            mercedes: ['C-Class', 'E-Class', 'S-Class']
+        };
+
+        function displayCars() {
+            const selectedBrand = document.getElementById('carbrand').value;
+            const carsContainer = document.getElementById('cars-container');
+
+            //clear the previous cars dipslyed
+            carsContainer.innerHTML = '';
+            for (let i = 0; i < 3; i++) {
+                const car = cars[selectedBrand][i]
+                const carElement = document.createElement('p');
+                carElement.textContent = car;
+                carsContainer.appendChild(carElement);
+
+            }
+        }
+    </script>
+</body>
+
+</html>

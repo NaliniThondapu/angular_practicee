@@ -1,0 +1,51 @@
+<html>
+    <head>
+<style>
+    a{
+        margin-left: 10px;
+    }
+</style>
+    </head>
+    <body>
+        Email Id: <input type=" text" id="email">
+        <button onclick="validateEmail()">Submit</button>
+        <div id="navbar">
+
+        </div>
+
+        <script>
+            var links = [
+                {
+                    name:"Facebook",
+                    source:"https://www.facebook.com"
+                },
+                {
+                    name:"Google",
+                    source:"https://www.gmail.com"
+                },
+                {
+                    name:"LinkedIn",
+                    source:"https://www.linkedin.com"
+                }
+            ]
+            var navbar = document.getElementById("navbar");
+
+            links.forEach(e1=>{
+                //here the link will create the anchor tags
+                //like <a href="https://www.facebook.com">Facebook</a>
+                navbar.innerHTML = navbar.innerHTML + e1.name.link(e1.source);
+
+            })
+            function validateEmail(){
+                var emailbox = document.getElementById('email');
+                var emailValue = emailbox.value;
+                if(!emailValue.endsWith("@gmail.com")){
+                    emailValue = emailValue.concat("@gmail.com");
+                    emailbox.value = emailValue;
+                }
+
+            }
+
+        </script>
+    </body>
+</html>
