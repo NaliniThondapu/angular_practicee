@@ -380,3 +380,26 @@ f2(); ////output is "rama developer 10 true"
 
 ```
 
+## Closures
+- These are nothing but nested functions.  These are allows us to create private functions.
+- These private functions are accessed by only parent not by other outside functions.
+
+### Example
+
+```
+function f1(){
+    var a =10;
+    console.log(a);
+
+    //private function
+    function f2(){
+      console.log(a+1)
+    }
+   }
+
+   f1()
+   f2() // getting error like " f2 is not defined"
+   // why because f2() is accessible to f1() only not able to call from outside.
+   
+ ```
+
