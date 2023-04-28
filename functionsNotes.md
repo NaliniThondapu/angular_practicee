@@ -207,3 +207,176 @@ sum(10,20,display)
 )(10,20);
 ```
 
+## Function Constructor
+- It can be used to create the objects from a Template. Keys must be same in all the objects.
+
+### Sample Object
+
+```
+  var emp1 = {
+    name:"Rama",
+    address:"Hyderabad",
+    company:"xyzsolutions.com"
+  }
+  ```
+  -  If we want build above type of objects of multiple employees ,instead of creating like above individually we can use function templates to create these of same types
+  -  These looks like normal functions. so to differentiate the normal functions and function templates, the functionTemplate name is in all Capital letters in  real time environment.
+
+### Example
+
+```
+  //Below "this" key word is nothing but Employee object
+function EMPLOYEE(name,address,company){
+  this.name = name;
+  this.address = address;
+  this.company = company;'
+   //we can also apply functions also to add extra functionalities to the object inside the template.
+  this.addDomain = function(){
+    this.name.concat("@gmail.com");
+}
+
+var emp1 = new EMPLOYEE("nalini","Hyd","xyz solutions");
+var emp2 = new EMPLOYEE("rama","Hyd","abc solutions");
+console.log(emp1)
+console.log(emp2)
+
+```
+
+- If we want add any extra functionalities to the object from the outside of the function construcotr we can use prototype.
+- Prototype can be used to implement some extra capabilities to object dynamically.
+
+### Example
+
+```
+EMPLOYEE.Prototype.addDomain = function(){
+  return this.name.concat("gmail.com");
+}
+
+console.log(emp1.addDomain()) // Output is nalini@gmail.com
+
+```
+
+## call, apply , bind methods (This is very important for interviews please check the examples as well)
+   -  These methods are used to inherit the functionalities from one object to another object.
+
+- ### call()
+- calling a function from one object to another object. Note: keys must be same in all the objects.
+
+### Example
+
+```
+var emp1 = {
+  name:"nalini", // the value is any thing like string , boolean,date, array ,object,function etc
+  city:"hyd",
+  details:function(){
+    return this.name+" "+this.city;
+  }
+}
+
+console.log(emp1.details()) // output is "ravi hyd"
+
+ If we want to call the details function for the below object instead of duplicate the code in the second object,
+  we can achieve this by using call method. we can achieve this only if keys must be same in both objects.
+
+var emp2 = {
+  name:"rama", // the value is any thing like string , boolean,date, array ,object,function etc
+  city:"hyd"
+}
+
+console.log(emp1.details.call(emp2)) //output is "rama hyd"
+
+```
+
+- suppose in case of keys are not same will not get the expected result. It will not throw any error.
+
+```
+var emp3 = {
+  names:"ramakrishna", // the value is any thing like string , boolean,date, array ,object,function etc
+  city:"hyd"
+} 
+
+console.log(emp1.details.call(emp3)) //output is "undefined hyd"
+```
+
+## Apply
+- Apply is also similar as call.
+-  The difference is call will accepy only individual parameters where as apply will accept an array.
+
+### Example
+
+```
+var emp1 = {
+  name:"nalini",
+  deatils:function(role,exp,certified){
+    return this.name+" "+role+" "+exp+" "+certified;
+  }
+}
+
+var emp2 ; {
+  name:"rama"
+}
+
+console.log(emp1.deatils.call(emp2)) // the output is "rama undefined undefined undefined"
+// why because we did not pass any arguments to the function
+
+// If we pass arguments the output is like below
+console.log(emp1.deatils.call(emp2,"developer",10,true)) // output is "rama developer 10 true"
+
+//if we have many arguments adding manually is very difficult for every call time
+// For this I want to pass these argumnets as an array like below
+
+
+var args = ["developer",10,true]
+console.log(emp1.deatils.call(emp2,args))// The ouput is "rama developer,10,true undefined undefined"
+// why because in "call" method all the array values as treated as the first argument value thats why last two were undefined.
+// This is because of call method accepts only individual arguments
+
+
+//to avoid the above issue we can use apply method
+var args = ["developer",10,true]
+console.log(emp1.deatils.apply(emp2,args)) // the ouput is "rama developer 10 true"
+
+```
+
+## bind
+
+-    This is also similar to call. call will execute as an when we define  , where as bind will execute when we call that explicitly.
+
+### Example
+
+```
+var emp1 = {
+  name:"nalini",
+  deatils:function(role,exp,certified){
+    return this.name+" "+role+" "+exp+" "+certified;
+  }
+}
+
+var emp2 ; {
+  name:"rama"
+}
+
+console.log(emp1.deatils.call(emp2,"dev",10,true));
+// if we want to call the same call need to write same code 
+console.log(emp1.deatils.call(emp2,"dev",10,true));
+console.log(emp1.deatils.call(emp2,"dev",10,true));
+
+//how many times we need to call this those many times need to write
+//to avoid this will bind this function to variable and resuse the same for any no of times like below
+
+const handler = emp1.deatils.bind(em2);
+
+function f1(){
+  console.log(handler())
+}
+
+f1(); //output is "rama developer 10 true"
+
+function f2(){
+  console.log(handler())
+}
+
+f2(); ////output is "rama developer 10 true"
+
+```
+
