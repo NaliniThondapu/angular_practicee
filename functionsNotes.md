@@ -382,7 +382,7 @@ f2(); ////output is "rama developer 10 true"
 
 ## Closures
 - These are nothing but nested functions.  These are allows us to create private functions.
-- These private functions are accessed by only parent not by other outside functions.
+- These private functions are limited to that perticular  parent function only not by other outside functions.
 
 ### Example
 
