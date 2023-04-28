@@ -401,5 +401,46 @@ function f1(){
    f2() // getting error like " f2 is not defined"
    // why because f2() is accessible to f1() only not able to call from outside.
    
+  
  ```
+ 
+ ## call by Vaue
+ - If we pass primitive values as argument while invoking  a function then the primitive values will be passed instead of address/reference of a variables.
 
+### Example
+
+```
+var a=10, b=20;
+
+function f1(x,y){
+  x=30;
+  y=40;
+}
+
+f1(a,b);
+console.log(a+b); // The output is 30 only not 70
+//because here a and b are primitives , while calling the function with these
+// primitives we can pass values instead of address of these variables.
+
+```
+
+## Call by reference
+
+-  If we pass non primitive types(like arrays, objects etc) as an argument to a function then the address/reference
+  will be passed    instead of value.
+  
+### Example
+
+```
+var a = [10,20,30]
+
+function f1(x){
+x.push(40);
+}
+
+f1(a);
+console.log(a) // output is [10,20,30,40]
+// here an array is non primitive type , so in this case we can pass reference/address. Whatever changes we can do on this will directly
+// reflect the reference data directly
+
+```
