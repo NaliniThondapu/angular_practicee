@@ -1,0 +1,46 @@
+<html>
+
+<head>
+
+<body>
+    <div id="parent">
+        <label><input type="checkbox" id="parent-checkbox" style="margin-bottom: 10px">Balanced Life</label>
+        <div id="childs">
+            <label><input type="checkbox" class="child-checkbox" style="margin-left: 10px">Smile</label><br>
+            <label><input type="checkbox" class="child-checkbox" style="margin-left: 10px">Laugh</label><br>
+            <label><input type="checkbox" class="child-checkbox" style="margin-left: 10px">Cry</label><br>
+            <label><input type="checkbox" class="child-checkbox" style="margin-left: 10px">Angry</label><br>
+            <label><input type="checkbox" class="child-checkbox" style="margin-left: 10px">Enjoyment</label>
+        </div>
+    </div>
+    <script>
+        var parentCheckBox = document.getElementById("parent-checkbox");
+        var childs = document.querySelectorAll(".child-checkbox");
+        //add eventlistener
+        parentCheckBox.addEventListener("change", function () {
+            if (parentCheckBox.checked) {
+                childs.forEach(child => {
+                    child.checked = true;
+                });
+            } else {
+                childs.forEach(child => {
+                    child.checked = false;
+                })
+            }
+        });
+        //add changeevent listener for each child box
+        childs.forEach(function(child){
+            child.addEventListener("change",function(){
+                //if all the childs got checked then check the parent
+                if(document.querySelectorAll(".child-checkbox:checked").length == childs.length){
+                    parentCheckBox.checked = true;
+                }else{
+                    parentCheckBox.checked = false;
+                }
+            })
+        })
+    </script>
+</body>
+</head>
+
+</html>

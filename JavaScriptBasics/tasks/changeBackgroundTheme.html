@@ -1,0 +1,34 @@
+<html>
+
+<body id=" body">
+    <label id="label">Select The Colour To change Background</label>
+    <select id="theme" onchange="changeTheme()">
+        <option value="lightblue">LIGHTBLUE</option>
+        <option value="red">RED</option>
+        <option value="green">GREEN</option>
+    </select>
+
+    <script>
+        function changeTheme() {
+            var colour = document.getElementById("theme").value;
+            switch (colour) {
+                case "lightblue": {
+                    document.body.style.backgroundColor = colour;
+                    break;
+                }
+                case "red": {
+                    document.body.style.backgroundColor = colour;
+                    break;
+                }
+                case "green": {
+                    document.body.style.backgroundColor = colour;
+                    break;
+                }
+
+            }
+        }
+    </script>
+
+</body>
+
+</html>
