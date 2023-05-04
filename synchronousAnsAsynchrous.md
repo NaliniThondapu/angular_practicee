@@ -250,4 +250,42 @@ mainFunction(add); //output is 9
 </html>
 
 ```
+## Calling Multiple Promises
 
+```
+const add = (num1, num2) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const result = num1 + num2;
+      resolve(result);
+    }, 1000);
+  });
+};
+
+const multiply = (num1, num2) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const result = num1 * num2;
+      resolve(result);
+    }, 1000);
+  });
+};
+
+add(2, 3)
+  .then(sum => {
+    console.log(`Sum: ${sum}`);
+    return multiply(sum, 4);
+  })
+  .then(product => {
+    console.log(`Product: ${product}`);
+    return add(product, 5);
+  })
+  .then(finalResult => {
+    console.log(`Final Result: ${finalResult}`);
+  })
+  .catch(error => {
+    console.error(error);
+  });
+
+
+```
