@@ -250,3 +250,168 @@ for (let key in person1) {
 
 ```
 
+
+## Map Object
+- Stores the data with key value pairs
+
+```
+const fruits = new Map([
+    ["apples", 50],
+    ["banana", 20],
+    ["oranges", 698]
+])
+
+//get the element value
+console.log(fruits.get("apples")) //50
+
+//set the new element and update the existing
+fruits.set("mangoes", 400)
+console.log(fruits.get("mangoes")) //400
+
+//delete removes the element
+fruits.delete("apples");
+console.log(fruits) //Map(3) { 'banana' => 20, 'oranges' => 698, 'mangoes' => 400 }
+
+//clear() removes all the elements from the map
+//has() check the elemet exist in the map or not
+console.log(fruits.has("apricots")) //false
+
+//typeof identifies the type of variable
+//instanceof 
+console.log(typeof fruits)//object
+console.log(fruits instanceof Map)//true
+
+//foreach
+fruits.forEach(function (value, key) {
+    console.log(value + ":" + key)
+})
+// 20:banana
+// 698:oranges
+// 400:mangoes
+
+//entries
+for(let entry of fruits.entries()){
+    console.log(entry)
+}
+//[ 'banana', 20 ]
+// [ 'oranges', 698 ]
+// [ 'mangoes', 400 ]
+
+//keys get all the keys
+console.log(fruits.keys()) //[Map Iterator] { 'banana', 'oranges', 'mangoes' }
+
+//values get all the values
+console.log(fruits.values())//[Map Iterator] { 20, 698, 400 }
+
+//create objects
+const apples = {name: 'Apples'};
+const bananas = {name: 'Bananas'};
+const oranges = {name: 'Oranges'};
+
+// Create a Map
+const fruits1 = new Map();
+
+// Add new Elements to the Map here the keys are objects
+fruits1.set(apples, 500);
+fruits1.set(bananas, 300);
+fruits1.set(oranges, 200);
+//here apples are objects thats why did not add double quotes
+console.log(fruits1.get(apples)) //500
+
+```
+
+## Set Object
+- A JavaScript Set is a collection of unique values.
+- Each value can only occur once in a Set.
+- A Set can hold any value of any data type.
+
+```
+//set Object
+const letters = new Set();
+letters.add("a");
+letters.add("b");
+letters.add("c");
+letters.add("c");
+letters.add("c");
+letters.add("c");
+letters.add("c");
+letters.add("c");
+
+console.log(letters) //Set(3) { 'a', 'b', 'c' }
+
+```
+
+## Math new Methods
+- Math.trunc()
+- Math.sign()
+- Math.cbrt()
+- Math.log2()
+- Math.log10()
+
+```
+
+//Math.trunc(x) returns the integer part of x:
+console.log(Math.trunc(4.6)) //4
+console.log(Math.trunc(-4.2));    // returns -4
+
+//Math.sign(x) returns if x is negative, null or positive:
+Math.sign(-4);    // returns -1
+Math.sign(0);    // returns 0
+Math.sign(4);    // returns 1
+//Math.cbrt(x) returns the cube root of x:
+Math.cbrt(8);    // returns 2
+Math.cbrt(64);    // returns 4
+Math.cbrt(125);    // returns 5
+
+//Math.log2(x) returns the base 2 logarithm of x:
+Math.log2(2);    // returns 1
+//Math.log10(x) returns the base 10 logarithm of x:
+Math.log10(10);    // returns 1
+
+```
+
+## New Number Properties
+
+- ES6 added the following properties to the Number object:
+
+- EPSILON
+- MIN_SAFE_INTEGER
+- MAX_SAFE_INTEGER
+
+```
+console.log(Number.EPSILON) //2.220446049250313e-16
+console.log(Number.MIN_SAFE_INTEGER)//-9007199254740991
+console.log(Number.MAX_SAFE_INTEGER)//9007199254740991
+
+```
+## New Number Methods
+- Number.isInteger() -- The Number.isInteger() method returns true if the argument is an integer.
+- Number.isSafeInteger() -- A safe integer is an integer that can be exactly represented as a double precision number.
+- Safe integers are all integers from -(253 - 1) to +(253 - 1).
+- This is safe: 9007199254740991. This is not safe: 9007199254740992.
+
+```
+Number.isSafeInteger(10);    // returns true
+Number.isSafeInteger(12345678901234567890);  // returns false
+Number.isInteger(10);        // returns true
+Number.isInteger(10.5);      // returns false
+
+```
+## Array Iterator
+
+```
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+const f = fruits.entries();
+
+for (let x of f) {
+  document.getElementById("demo").innerHTML += x;
+}
+
+o/p
+----
+[ 0, 'Banana' ]
+[ 1, 'Orange' ]
+[ 2, 'Apple' ]
+[ 3, 'Mango' ]
+
+```
