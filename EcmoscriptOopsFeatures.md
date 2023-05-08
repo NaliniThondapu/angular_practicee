@@ -159,6 +159,8 @@ function* generatorname{
 }
 
 ```
+
+```
 function* f1(){
     console.log(1)
     console.log(2)
@@ -185,5 +187,20 @@ console.log('random text')
 generator.next()
 generator.next()
 generator.next()
+
+```
+
+## Output
+
+```
+1
+2
+Function f2
+3
+4
+random text
+5
+6
+7
 
 ```
