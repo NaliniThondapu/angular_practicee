@@ -291,22 +291,112 @@ enum configurations{
 ## Type Inference
 - The type script infers the type of the variable based on the data assigned to the variable.
 
- 
+ ```
+ let name = "John"; // The variable 'name' is inferred as a string type.
+let age = 25; // The variable 'age' is inferred as a number type.
+let isEmployed = true; // The variable 'isEmployed' is inferred as a boolean type.
 
+```
+## TypeCompatibilty
+- we can give alias names to the data types.
+- This allows to create custom types as well.
+- This has the following types
 
+- ## UnionTypes
+- This allows multiple types into one.we can declare a variable with union type , it can hold values of different types
 
+ ```
+ let myvar : number | string
+myvar = 123 //valid
+myvar = "nalini" //valid
 
+```
 
+- ## Intersection Types
+- Intersection types allow you to combine multiple types into a single type that has all the properties and methods of each constituent type. The resulting type will have all the members of the individual types.
 
+```
+interface A{
+    propA:number
+}
 
+interface B{
+    propB:String
+}
 
+type IntersectionType = A & B
 
+let myobject : IntersectionType = {
+    propA :10,
+    propB :"Nalini"
+}
 
+console.log(myobject) //{ propA: 10, propB: 'Nalini' }
 
+```
 
+-  ## Type Guards
+-  Type guards are conditional statements or functions that narrow down the type of a variable within a specific code block. 
 
+```
+function doSomething(value : string | number){
+    if(typeof value == 'number'){
+        console.log(value.toFixed(2))
+    }else{
+        console.log(value.toUpperCase())
+    }
+}
 
+doSomething(123.3545) //123.35
+doSomething("nalini") //NALINI
 
+```
+- ## Conditional Types 
+- Conditional types allow you to define types that depend on a condition
+- Conditional types use the **extends** keyword to define type branches.
 
+```
+type isString<T> = T extends string ? true : false
+let value1 :isString<"nalini">
 
+```
 
+- ## Mapped Types
+- Mapped types allow you to transform the properties of an existing type to create a new type. You can iterate over the properties of an existing type and modify their types, add new properties, or remove existing properties
+
+```
+Readonly: The Readonly mapped type transforms all properties of an object to be read-only.
+
+interface Person {
+  name: string;
+  age: number;
+}
+
+type ReadonlyPerson = Readonly<Person>;
+// ReadonlyPerson is { readonly name: string; readonly age: number;
+```
+
+## Modules
+ -  In ES modules, you can use the export and import keywords to define and consume module functionality.
+
+```
+// File: mathUtils.ts
+exports.add = (a, b) => a + b;
+
+// File: app.ts
+const mathUtils = require('./mathUtils');
+console.log(mathUtils.add(2, 3)); // Output: 5
+
+```
+
+```
+// File: mathUtils.ts
+export function add(a, b) {
+  return a + b;
+}
+
+// File: app.ts
+import { add } from './mathUtils';
+console.log(add(2, 3)); // Output: 5
+
+```
