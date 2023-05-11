@@ -49,6 +49,224 @@ ng generate service <servicename> -- is used to create the services
 - "a routerLink="register"" , this routerLink property usage is to add this "register" in the url like "http://localhost:4200/register"
 -  with the above path , it will check **app.routing.module.ts** is there any path matching with if it matches load the component otherwise not. 
 
+## PropertyBinding
+- In angular it allows to bind the property of a component to avalue or expression.
+- This enables you to dynamically update the property based on changes in your application
+
+## Example
+
+## Component
+
+```
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-data-events',
+  templateUrl: './data-events.component.html',
+  styleUrls: ['./data-events.component.css']
+})
+export class DataEventsComponent {
+  customType: string = "text"
+  placeHolderValue: string = "please enter user name"
+  username: string = "nalini"
+  prodImage: string = "https://images.pexels.com/photos/1212693/pexels-photo-1212693.jpeg?cs=srgb&dl=pexels-katie-burandt-1212693.jpg&fm=jpg"
+  link1: string = "http://facebook.com"
+}
+
+```
+
+## Html Of this component
+
+```
+<p>data-events works!</p>
+<h1>Data And Events In angular</h1>
+
+<h2> Property Binding</h2>
+<!-- here customtype is dataevent component class variable name-->
+<!-- passing the data from component to UI-->
+Name:<input [type]="customType" [placeholder]="placeHolderValue" [value]="username"><br>
+product Image:<img [src]="prodImage" width="500px" height="500px"><br>
+Link: <a [href]="link1">Click</a>
+
+```
+
+## Attribute Binding
+- Attribute binding in Angular allows you to bind an element's attribute to a value or expression. 
+- This enables you to dynamically set attributes based on the state of your application
+
+```
+<h2>Attrbute Binding</h2>
+<!-- component to html-->
+<button [attr.isDisabled]="isDisabled">Submit</button>
+
+```
+
+```
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-data-events',
+  templateUrl: './data-events.component.html',
+  styleUrls: ['./data-events.component.css']
+})
+export class DataEventsComponent {
+  //Attribute Binding
+  isDisabled: boolean = true;
+}
+
+```
+
+## Style Binding
+
+```
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-data-events',
+  templateUrl: './data-events.component.html',
+  styleUrls: ['./data-events.component.css']
+})
+export class DataEventsComponent {
+  //sty;e binding
+  bg_color: string = "black"
+  txt_color: string = "white"
+}
+```
+```
+<!--Style Binding class component to UI-->
+<h2>Style Binding</h2>
+<h3 style="background-color: black; color: white;">This is Header1</h3>
+<!-- here style.backgroundColor and style.color are predefined keys -->
+<h3 [style.backgroundColor]="bg_color" [style.color]="txt_color">This is Header1</h3>
+
+```
+
+## Class Binding
+## Html
+ ```
+ <!-- class binding component to UI only-->
+<!-- blApplyClass is true the customCSS style will applied otherwise style cannot applied-->
+<h2>class Binding</h2>
+<h3 [class.customCSS]="blApplyClass">This is some header</h3>
+
+```
+
+## component
+
+```
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-data-events',
+  templateUrl: './data-events.component.html',
+  styleUrls: ['./data-events.component.css']
+})
+export class DataEventsComponent {
+  //class binding
+  blApplyClass = false
+}
+
+```
+
+## css
+
+```
+.customCSS{
+  background-color: coral;
+  color:white
+}
+
+```
+
+## Event Binding
+- For event binding we need use **()** braces instead of **[]** like **(click)**
+
+```
+<!-- event binding UI to component-->
+<h2>Event Binding</h2>
+<button (click) = "eventBinding()">Click Me</button>
+
+```
+
+## Component
+```
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-data-events',
+  templateUrl: './data-events.component.html',
+  styleUrls: ['./data-events.component.css']
+})
+export class DataEventsComponent {
+  //event binding
+  eventBinding(){
+    alert("Event binding got clicked")
+  }
+}
+
+```
+
+## Two way binding
+- component to html and html to component
+- For two way binding we need forms module
+- so, we need to import this into our **app.module.ts**. It is mandatory for two way binding.
+- we can achieve two way binding "ngModel" only. If multiple elements have twoway binding all parameter name is ngmodel only but the value name is different.
+
+## app.module.ts
+```
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+@NgModule({
+  declarations: [
+    DataEventsComponent
+  ],
+  imports: [
+    FormsModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+```
+
+## html
+
+```
+<!-- Two way binding or banana binding with "ngModel"-->
+<!-- for two way binding we need to import forms module in apps.module.ts-->
+<!-- class to UI and UI to Class-->
+<h2> Two way data binding</h2>
+Name:<input type="text" [(ngModel)] = "username1">
+<button (click)="getUserName()">Click</button>
+
+```
+
+```
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-data-events',
+  templateUrl: './data-events.component.html',
+  styleUrls: ['./data-events.component.css']
+})
+export class DataEventsComponent {
+
+  //twoway binding
+  username1: string = "kumar"
+
+  getUserName() {
+    alert(this.username1);
+  }
+
+
+}
+
+```
+
+
+
 
 
 
