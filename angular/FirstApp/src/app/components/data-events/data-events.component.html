@@ -1,0 +1,37 @@
+<p>data-events works!</p>
+<h1>Data And Events In angular</h1>
+
+<h2> Property Binding</h2>
+<!-- here customtype is dataevent component class variable name-->
+<!-- passing the data from component to UI-->
+Name:<input [type]="customType" [placeholder]="placeHolderValue" [value]="username"><br>
+product Image:<img [src]="prodImage" width="500px" height="500px"><br>
+Link: <a [href]="link1">Click</a>
+
+<h2>Attrbute Binding</h2>
+<!-- component to html-->
+<button [attr.isDisabled]="isDisabled">Submit</button>
+
+<!--Style Binding class component to UI-->
+<h2>Style Binding</h2>
+<h3 style="background-color: black; color: white;">This is Header1</h3>
+<!-- here style.backgroundColor and style.color are predefined keys -->
+<h3 [style.backgroundColor]="bg_color" [style.color]="txt_color">This is Header1</h3><br><br>
+
+
+<!-- class binding component to UI only-->
+<!-- blApplyClass is true the customCSS style will applied otherwise style cannot applied-->
+<h2>class Binding</h2>
+<h3 [class.customCSS]="blApplyClass">This is some header</h3>
+
+<!-- event binding UI to component-->
+<h2>Event Binding</h2>
+<button (click) = "eventBinding()">Click Me</button><br>
+
+
+<!-- Two way binding or banana binding with "ngModel"-->
+<!-- for two way binding we need to import forms module in apps.module.ts-->
+<!-- class to UI and UI to Class-->
+<h2> Two way data binding</h2>
+Name:<input type="text" [(ngModel)] = "username1">
+<button (click)="getUserName()">Click</button>
