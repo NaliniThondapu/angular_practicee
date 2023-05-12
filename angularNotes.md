@@ -8,6 +8,7 @@ we can write the above commanda like below as well
 ng s --port 4500
 ng generate component <componentname> --- this command is used to create the component
 ng generate service <servicename> -- is used to create the services
+ng generate pipe <pipes name> --- is used to generate the pipes
 
 ```
 
@@ -265,8 +266,162 @@ export class DataEventsComponent {
 
 ```
 
+## Pipes
+- In angular pipes are the features that allows to transform the data in the user understanable format.
+- Pipes are used to format, filter, and manipulate data before displaying it to the user. 
+- Pipes are represented by the **|** symbol in Angular
+- By default the pipes are pure pipes.
+
+## Examples for Predefined Pipes
+
+```
+<h2>Pipes in Angular</h2>
+{{username1 | titlecase }}
+
+<!-- converting the object values in different formats-->
+<!-- predefined pipes-->
+{{movie.title | titlecase}}<br>
+{{movie.director | uppercase}}<br>
+{{movie.plot | lowercase}}<br>
+{{movie.subscriber | number}}<br>
+{{movie.budget | currency :'INR'}}<br>
+{{movie.year | date:'yyyy-MM-dd'}}<br>
+{{movie | json}}<br>
+```
+
+## Component
+```
+ username1: string = "kumar"
+
+  movie = {
+    title: 'avenger',
+    director: 'john',
+    plot: 'CRIME',
+    subscriber: 1645622,
+    budget: 545562164,
+    year: new Date()
+  }
+```
+
+## Custom Pipes
+- we need to create the pipe under app folder , need to use the below command
+- ng generate pipe pipes/getFirst50Char
+- we created the **getFirst50Char** pipe under the pipes folder.
+- The above pipe component looks like below.
+- This will implements the "PipeTransform" interface , and must implement only one "transform" method.
+- One pipe must have only one transform method.
+
+```
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'getFirst50Char'
+})
+export class GetFirst50CharPipe implements PipeTransform {
+
+  transform(value: string) {
+    return value.substring(0, 50);
+  }
+
+}
+
+```
+## In Html
+```
+<!-- custom pipes-->
+<!-- we are getting first 50 chars from the custompipe after that will transform into uppercase-->
+{{param | getFirst50Char | uppercase}}
+```
+
+## param intialisation in the component
+
+```
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-data-events',
+  templateUrl: './data-events.component.html',
+  styleUrls: ['./data-events.component.css']
+})
+export class DataEventsComponent {
+  
+  param: string = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
+
+}
+
+```
+
+## Pure and Impure Pipes
+### Pure Pipes
+- Pure pipes are the default type of pipes in Angular.
+- A pure pipe is only called when Angular detects a change in the value or the parameters passed to a pipe
+- By default all the pipes are pure.
+- Examples of pure pipes are uppercase, lowercase, date, currency, and json.
+- But always try to use pure pipes only.
+
+### Impure Pipes
+- An impure pipe is called for every change detection cycle no matter whether the value or parameter(s) changes.
+
+```
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'filterpipe',
+  pure:false//making this pipe is impure
+})
+export class FilterpipePipe implements PipeTransform {
+
+  transform(list: any[], filterText: string): any {
+    return list ? list.filter(item => item.name.search(new RegExp(filterText, 'i'))) : "";
+  }
+
+}
+```
+```
+<!-- pure and impure pipes-->
+<input type="text" [(ngModel)]='searchText'>
+<button (click)='addUser()'>AddUser</button>
+<ul>
+  <li *ngFor="let user of users | filterpipe :searchText">{{user.name}}</li>
+</ul>
+
+```
+
+```
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-data-events',
+  templateUrl: './data-events.component.html',
+  styleUrls: ['./data-events.component.css']
+})
+export class DataEventsComponent {
+  users = [
+    {
+      id: 100,
+      name: 'nalini'
+    },
+    {
+      id: 101,
+      name: 'rama'
+    },
+    {
+      id: 102,
+      name: 'mallika'
+    }
+  ]
+  searchText: string = "";
+
+  getUserName() {
+    alert(this.username1);
+  }
+
+  addUser() {
+    this.users.push({ id: 105, name: 'malathi' })
+  }
 
 
-
+}
+```
 
 
