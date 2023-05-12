@@ -10,6 +10,8 @@ import { UsersComponent } from './components/users/users.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DataEventsComponent } from './components/data-events/data-events.component'
 import { FormsModule } from '@angular/forms';
+import { GetFirst50CharPipe } from './pipes/get-first50-char.pipe';
+import { FilterpipePipe } from './pipes/filterpipe.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { FormsModule } from '@angular/forms';
     RegisterComponent,
     NavbarComponent,
     UsersComponent,
-    DataEventsComponent
+    DataEventsComponent,
+    GetFirst50CharPipe,
+    FilterpipePipe
   ],
   imports: [
     BrowserModule,

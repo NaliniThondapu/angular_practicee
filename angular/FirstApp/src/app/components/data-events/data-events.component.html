@@ -26,12 +26,39 @@ Link: <a [href]="link1">Click</a>
 
 <!-- event binding UI to component-->
 <h2>Event Binding</h2>
-<button (click) = "eventBinding()">Click Me</button><br>
+<button (click)="eventBinding()">Click Me</button><br>
 
 
 <!-- Two way binding or banana binding with "ngModel"-->
 <!-- for two way binding we need to import forms module in apps.module.ts-->
 <!-- class to UI and UI to Class-->
 <h2> Two way data binding</h2>
-Name:<input type="text" [(ngModel)] = "username1">
+Name:<input type="text" [(ngModel)]="username1">
 <button (click)="getUserName()">Click</button>
+
+
+<br><br>
+
+<h2>Pipes in Angular</h2>
+{{username1 | titlecase }}
+
+<!-- converting the object values in different formats-->
+<!-- predefined pipes-->
+{{movie.title | titlecase}}<br>
+{{movie.director | uppercase}}<br>
+{{movie.plot | lowercase}}<br>
+{{movie.subscriber | number}}<br>
+{{movie.budget | currency :'INR'}}<br>
+{{movie.year | date:'yyyy-MM-dd'}}<br>
+{{movie | json}}<br>
+
+<!-- custom pipes-->
+<!-- we are getting first 50 chars from the custompipe after that will transform into uppercase-->
+{{param | getFirst50Char | uppercase}}<br>
+
+<!-- pure and impure pipes-->
+<input type="text" [(ngModel)]='searchText'>
+<button (click)='addUser()'>AddUser</button>
+<ul>
+  <li *ngFor="let user of users | filterpipe :searchText">{{user.name}}</li>
+</ul>
