@@ -1,6 +1,7 @@
 ## Basic commands
 
 ```
+npm install --global yarn -----this command is useful to install yarn this is useful to work with express JS
 ng new FirstApp --- to create the new angular app
 ng serve  -- to start the application, by defult the port is 4200
 ng serve --port 4500 --- to start the application with required port
@@ -11,6 +12,16 @@ ng generate service <servicename> -- is used to create the services
 ng generate pipe <pipes name> --- is used to generate the pipes
 
 ```
+
+## What is single page Application
+
+- The Application loads only once initially when the user access the web application thats why we called this angular page is called single page application.
+- Once the application got loaded , everytime when user interacts with our web page,  request will be sent to the backend and but the  backend is responsible only for sending appropriate data to the frontend.
+- The front end will dynamically update the html DOM with out refreshing the entire web page.
+- It provides a greate user interaction and it is very fast why because once the data is loaded in the web browser we need not load again and again.
+- It is easy to develop.
+- Best Examples are : Facebook and gmai.
+
 
 ## Package.json
 - It has all the project dependencies.
