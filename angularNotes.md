@@ -10,6 +10,7 @@ ng s --port 4500
 ng generate component <componentname> --- this command is used to create the component
 ng generate service <servicename> -- is used to create the services
 ng generate pipe <pipes name> --- is used to generate the pipes
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned ----- this command is used in case of any execution policy error for powershell. we need open the power shell as administrator and then select A(for all) then enter.
 
 ```
 
@@ -29,6 +30,13 @@ ng generate pipe <pipes name> --- is used to generate the pipes
 - It has dependencies and devdependencies. Dependencies , it has list of prduction dependencies required by angular application.
 - These dependencies include Angular libraries, third-party libraries, and other modules needed for the application to function correctly
 - The devDependencies section of the package.json file lists the development dependencies required for development and build processes. These dependencies include tools like TypeScript, testing frameworks, build tools, and other development-specific modules. Dev dependencies are not included in the production build of the application. Similar to production dependencies, you can manage dev dependencies using the package manager.
+
+
+## package-lock.json
+- It is same as package.json , along with the dependencies  it has additional information  like all node modules version and its path.
+
+## .gitignore file
+- This has what ever files we do not want to commit to the github we can add those in this file.
 
 ## tsconfig.json
 - The application builds  basing on this configuration only at the time of compilation time.
