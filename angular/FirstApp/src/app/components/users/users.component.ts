@@ -7,22 +7,22 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  // users: any = ["rama", "seetha", "hanuma"];
-  // userObjects: any = [
-  //   {
-  //     name: "nalini",
-  //     place: "hyd"
-  //   },
-  //   {
-  //     name: "shiva",
-  //     place: "hyd"
-  //   },
-  //   {
-  //     name: "rama",
-  //     place: "hyd"
-  //   }
-  // ]
-  users: any;
+  users: any = ["rama", "seetha", "hanuma","navya"];
+  userObjects: any = [
+    {
+      name: "nalini",
+      place: "hyd"
+    },
+    {
+      name: "shiva",
+      place: "hyd"
+    },
+    {
+      name: "rama",
+      place: "hyd"
+    }
+  ]
+
 
   constructor(private user: UsersService) { }
   //this is just like iifes
