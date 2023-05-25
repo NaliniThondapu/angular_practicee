@@ -1,0 +1,41 @@
+<html>
+    <head>
+
+    </head>
+
+    <body>
+        <table border="2" width="100%">
+            <thead>
+                <td>Name</td>
+                <td>Email</td>
+                <td>Phone</td>
+                <td>UserName</td>
+            </thead>
+            <tbody id="tbody">
+
+            </tbody>
+        </table>
+
+        <script>
+            // I am creating IIFES need to execute this while loading the page itself
+            (function(){
+                var http = new XMLHttpRequest();
+                http.open("GET","https://jsonplaceholder.typicode.com/users");
+                //the below function will execute when readystatechange is true otherwise it will keep on exeute this
+                //because the IIFE need to finish before the application is initialised
+                http.onreadystatechange = function(){
+                    if(http.status == 200 && http.readyState == 4){
+                        var users = JSON.parse(http.responseText);
+                        var tbody = document.getElementById("tbody");
+
+                        users.forEach(user => {
+                            tbody.innerHTML += "<tr>"+"<td>"+  user.name  +"</td>"+"<td>"+  user.email  +"</td>"+"<td>"+  user.phone  +"</td>"+"<td>"+  user.username  +"</td>"+"</tr>"  
+                        });
+
+                    }
+                }
+                http.send();
+            })();
+        </script>
+    </body>
+</html>

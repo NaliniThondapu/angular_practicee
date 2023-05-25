@@ -1,0 +1,38 @@
+<html>
+
+<head>
+    <!--hear body *  menas will apply the same style to paraent and its childs as well -->
+    <style>
+        
+        body *{
+            margin:10px;
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Here form is parent and div ,p are childs all have sam onclick event-->
+    <form onclick="form()">FORM
+        <div onclick="div()">DIV
+            <p id ="p">P</p>
+        </div>
+    </form>
+
+    <script>
+        function form() {
+            alert("form")
+        }
+        function div() {
+            alert("div")
+        }
+        var p = document.getElementById("p");
+        p.addEventListener("click",function(){
+            alert("p");
+            event.stopPropagation();//This will stop propagating from child element to parent element i.e we can avoid Event bubbling.
+            // event.stopImmediatePropagation();// only first event wull be executed and remaining all will be stopped.
+        })
+    </script>
+</body>
+
+</html>

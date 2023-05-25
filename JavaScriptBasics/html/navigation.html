@@ -1,0 +1,24 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <h1 id="id01">My First Page</h1>
+    <p id="id02"> This is my paragraph data</p>
+    <a href="">Link</a>
+    <script>
+        body = document.body;
+        bodyParent = body.bodyParent;
+        console.log(bodyParent) //output is html
+        console.log(bodyParent.bodyParent) // document
+
+        console.log(body.firstChild.nextSibling) //h1
+        console.log(body.lastChild.previousSibling.previousSibling)//a
+
+        var x = body.lastChild.previousSibling.previousSibling;
+        x.href = "https://facebook.com";
+    </script>
+</body>
+
+</html>

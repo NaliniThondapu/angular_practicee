@@ -117,3 +117,642 @@ if, elseif & else syntax:
         //code
      }
 
+  
+  "for of"   and "for in" are as part of ES6(Ecma script6)
+  ===========================
+
+  To loop through arrays , using for-of is easy compare to normal for loop
+
+  Eg:
+  =======
+
+    var arr = [1,2,3,44]
+    for(const element of arr){
+      console.log(element)
+    }
+
+
+  where as for-in is used to iterate the objects.
+  ======================================
+
+  Eg:
+  =======
+
+  const obj = {a:1, b:2, c:3};
+
+  for( const property in object){
+    //here we used template laterals to build the string(like ${property}: ${obj[property]}) instead of + operator to concat
+    // the template laterals were build using backticks(``)
+    console.log(`${property}: ${obj[property]}`)
+  }
+
+  while:
+  ================
+     syntax:
+     ====
+
+     while(test-condition){
+      //code
+     }
+
+     eg:
+     =====
+
+     var i=10;
+     while(i<=10){
+      console.log(i);
+      i++;
+     }
+
+do-while
+=================
+
+syntax:
+==============
+
+do{
+
+}while(test-condition)
+
+Eg:
+====
+
+var isServerInitialised = false;
+var i=0;
+
+do{
+  if(!isServerInitialised){
+    console.log(isServerInitialised);
+    isServerInitialised=true;
+  }
+
+  console.log(i);
+i++;
+}while(i<=10)
+
+
+Jump statements:
+======================
+    These are used to jump control from one place to another.
+
+continue
+==============
+  This one we can used for to skip the interation
+for(var i=0;i<=10;i++){
+  if(i==2 || i==4){
+    continue;
+  }
+  console.log(i)
+}
+
+return
+============
+  It is used to terminate the function
+
+eg:
+======
+
+function f1(){
+  var a=10;
+
+  if(a<20){
+    console.log(a);
+    return;
+    console.log(a-2); // this will not execute after return
+  }
+
+  console.log(a+20);
+}
+
+break:
+======
+  It is used to terminate the block.
+
+
+eg:
+===
+
+function cricketFormat(){
+  var noOfOvers = 50;
+
+  switch(noOfovers){
+    case 20:
+       console.log("T20"); break;
+    case 50:
+      console.log("One Day");break;
+      default:
+    console.log("None")
+  }
+}
+
+
+setTimeOut , setInterval,clearInterval
+===============================================
+
+setTimeOut
+------
+   To delay the execution of code we can use setTimeOut
+
+eg:
+======
+
+function f1(){
+  console.log("Hello");
+
+  setTimeOut(()=>{
+    console.log("Hello with setTimeOut"); //this log will print after 3000MilliSeconds
+  },3000);
+
+  console.log("Settimeout block");// this log will execute immediately it will not wait for above Settimeout
+  // Inside the settimeout statements only will excute after the 3000ms others will execute as useual.
+  // setTimeOut will accept functions like arrow, aninymous functions
+
+}
+
+f1();
+
+
+setInterval:
+-------------------
+For every certain amount of time the code will execute.
+
+eg:
+======
+setInterval(()=>{
+  console.log("Set Interval");
+},1000);
+// The code inside the setInterval will execute after every 1000ms.
+//Mostly this setInterval will use to update digital clock
+
+
+clearInterval
+=======
+
+This method clears the timer set with the setIntervalmethod.
+
+eg:
+================
+// In the below example , when will click on the "stop the time" button it will clear the timer setin the setInterval.
+<html>
+<body>
+
+<h1>The Window Object</h1>
+<h2>The setInterval() and clearInterval() Methods</h2>
+
+<p id="demo"></p>
+
+<button onclick="myStop()">Stop the time</button>
+
+<script>
+const myInterval = setInterval(myTimer, 1000);
+
+function myTimer() {
+  const date = new Date();
+  document.getElementById("demo").innerHTML = date.toLocaleTimeString();
+}
+
+function myStop() {
+  clearInterval(myInterval);
+}
+</script>
+
+</body>
+</html>
+
+functions
+=========================
+
+    A function is a block of statements that takes an input(optional) , process it and provides some result.
+    A function should always holds a single responsibility.
+
+we can represent the function in four ways
+
+1. Function with parameters and with return type
+2. Function without parameters and with return type;
+3. Function with parameters and with out return type
+4. Function without parameters and with out return type
+
+syntax
+=====
+
+function functionname(parameters){
+  //code
+}
+
+Eg:
+=====
+function test(){
+  console.log("Test function)
+}
+//calling the function like below
+test()
+
+Function areguments
+===========================
+
+  function test(a,b){
+    console.log(a)
+    console.log(b)
+    console.log(arguments)// arguments keyword is used to hold all the available arguments in an object.
+  }
+
+  test(10,20) 
+  0/p:
+  -----
+  10
+  20
+  [Arguments]{'0':10,'1':20}
+
+  // Now i am passing 3 argumnets to the function
+  test(10,20,30)
+
+o/p:
+=====
+In java script we can pass any number arguments it will not throw any error. This is also one type of interview question
+
+  10
+  20
+  [Arguments]{'0':10,'1':20,'3':30}
+
+  Duplicate functions
+  ======================
+       In javascript duplicate functions are allowed.  It executes the latest implementation only while calling this.
+  This is type of overriding.
+   
+  function f1(){
+    console.log("I am a original function")
+  }
+
+    function f1(){
+    console.log("I am a duplicate function")
+  }
+
+  f1()
+
+  o/p
+  ====
+  I am a duplicate function
+
+  Anonymous Function
+  =========================
+
+  A function with out a name is called an anonymous function.
+
+  Eg:
+  ====
+    function f1(a){ // here function as a parameter
+      a();
+    }
+
+    f1(function(){console.log("I am an anonymous function")});
+ 
+ Function Expression:
+ =======
+    If we can refer a function with a variable , then it is function expression.
+
+    function f1(a){
+      a();
+    }
+
+    var anonymousFun = function(){console.log("I am an anonymous function")};// This is a function expression.
+f1(anonymousFun);
+
+
+IIFE's:
+  Immediately Invoked Function expressions are used to execute a function 
+  only once as soon as the application gets triggered as part of execution.
+
+     These are mainly used in initializing application/pages resources.4
+
+  syntax
+=====
+(
+  function(){
+    //code
+  }
+)()
+
+example
+======
+
+(
+  function(){
+    console.log("I am an IIFE")
+  }
+)();
+
+//named IIFE
+(
+  function namedIIFE(){
+    console.log("I am a namedIIFE");
+  }
+)();
+
+//IIFE with parameters
+
+(
+  function iifeWithparam(a,b){
+    console.log(a+b);
+  }
+)(10,20);
+
+Function Constructor
+====================
+  It can be used to create the objects from a Template. Keys must be same in all the objects.
+
+  Sample Object
+  =======
+
+  var emp1 = {
+    name:"Rama",
+    address:"Hyderabad",
+    company:"xyzsolutions.com"
+  }
+
+  If we want build above type of objects of multiple employees , 
+  instead of creating like above individually we can use function templates to create these of same types.
+
+  example
+  ========
+  //Below "this" key word is nothing but Employee object
+function Employee(name,address,company){
+  this.name = name;
+  this.address = address;
+  this.company = company;
+  //we can also apply functions also to add extra functionalities to the object inside the template.
+  this.addDomain = function(){
+    this.name.concat("@gmail.com");
+  }
+}
+
+var emp1 = new Employee("nalini","Hyd","xyz solutions");
+var emp2 = new Employee("rama","Hyd","abc solutions");
+console.log(emp1)
+console.log(emp2)
+
+If we want add any extra functionalities to the object from the outside of the function construcotr we can use prototype.
+Prototype can be used to implement some extra capabilities to object dynamically.
+
+EMPLOYEE.Prototype.addDomain = function(){
+  return this.name.concat("gmail.com");
+}
+
+console.log(emp1.addDomain()) // Output is nalini@gmail.com
+
+
+call, apply , bind
+=================================
+ These methods are used to inherit the functionalities from one object to another object.
+
+ call
+ ===
+
+    calling a function from one object to another object. Note: keys must be same in all the objects.
+
+example
+=====
+
+var emp1 = {
+  name:"nalini", // the value is any thing like string , boolean,date, array ,object,function etc
+  city:"hyd",
+  details:function(){
+    return this.name+" "+this.city;
+  }
+}
+
+console.log(emp1.details()) // output is "ravi hyd"
+
+ If we want to call the details function for the below object instead of duplicate the code in the second object,
+  we can achieve this by using call method. we can achieve this only if keys must be same in both objects.
+
+var emp2 = {
+  name:"rama", // the value is any thing like string , boolean,date, array ,object,function etc
+  city:"hyd"
+}
+
+console.log(emp1.details.call(emp2)) //output is "rama hyd"
+
+suppose in case of keys are not same will not get the expected result. It will not throw any error.
+
+var emp3 = {
+  names:"ramakrishna", // the value is any thing like string , boolean,date, array ,object,function etc
+  city:"hyd"
+} 
+
+console.log(emp1.details.call(emp3)) //output is "undefined hyd"
+
+
+apply
+==================
+Apply is also similar as call.
+    The difference is call will accepy only individual parameters where as apply will accept an array.
+
+example
+=========
+
+var emp1 = {
+  name:"nalini",
+  deatils:function(role,exp,certified){
+    return this.name+" "+role+" "+exp+" "+certified;
+  }
+}
+
+var emp2 ; {
+  name:"rama"
+}
+
+console.log(emp1.deatils.call(emp2)) // the output is "rama undefined undefined undefined"
+// why because we did not pass any arguments to the function
+
+// If we pass arguments the output is like below
+console.log(emp1.deatils.call(emp2,"developer",10,true)) // output is "rama developer 10 true"
+
+//if we have many arguments adding manually is very difficult for every call time
+// For this I want to pass these argumnets as an array like below
+
+
+var args = ["developer",10,true]
+console.log(emp1.deatils.call(emp2,args))// The ouput is "rama developer,10,true undefined undefined"
+// why because in "call" method all the array values as treated as the first argument value thats why last two were undefined.
+// This is because of call method accepts only individual arguments
+
+
+//to avoid the above issue we can use apply method
+var args = ["developer",10,true]
+console.log(emp1.deatils.apply(emp2,args)) // the ouput is "rama developer 10 true"
+
+
+bind
+===========================
+
+   This is also similar to call. call will execute as an when we define  , where as bind will execute when we call that explicitly.
+
+example
+==============
+
+var emp1 = {
+  name:"nalini",
+  deatils:function(role,exp,certified){
+    return this.name+" "+role+" "+exp+" "+certified;
+  }
+}
+
+var emp2 ; {
+  name:"rama"
+}
+
+console.log(emp1.deatils.call(emp2,"dev",10,true));
+// if we want to call the same call need to write same code 
+console.log(emp1.deatils.call(emp2,"dev",10,true));
+console.log(emp1.deatils.call(emp2,"dev",10,true));
+
+//how many times we need to call this those many times need to write
+//to avoid this will bind this function to variable and resuse the same for any no of times like below
+
+const handler = emp1.deatils.bind(em2);
+
+function f1(){
+  console.log(handler())
+}
+
+f1(); //output is "rama developer 10 true"
+
+function f2(){
+  console.log(handler())
+}
+
+f2(); ////output is "rama developer 10 true"
+
+
+closures
+==================
+
+   These are nothing but nested functions.  These are allows us to create private functions.
+   These private functions are accessed by only parent not by other outside functions.
+
+   example
+   ======
+
+   function f1(){
+    var a =10;
+    console.log(a);
+
+    //private function
+    function f2(){
+      console.log(a+1)
+    }
+   }
+
+   f1()
+   f2() // getting error like " f2 is not defined"
+   // why because f2() is accessible to f1() only not able to call from outside.
+
+call by value
+================
+
+If we pass primitive values as argument while invoking  a function then 
+the primitive values will be passed instead of address/reference of a variables.
+
+example
+======
+
+var a=10, b=20;
+
+function f1(x,y){
+  x=30;
+  y=40;
+}
+
+f1(a,b);
+console.log(a+b); // The output is 30 only not 70
+//because here a and b are primitives , while calling the function with these
+// primitives we can pass values instead of address of these variables.
+
+
+call by reference
+=======
+
+  If we pass non primitive types(like arrays, objects etc) as an argument to a function then the address/reference
+  will be passed    instead of value.
+var a = [10,20,30]
+
+function f1(x){
+x.push(40);
+}
+
+f1(a);
+console.log(a) // output is [10,20,30,40]
+// here an array is non primitive type , so in this case we can pass reference/address. Whatever changes we can do on this will directly
+// reflect the reference data directly
+
+
+Objects:
+=======
+
+create() method
+=======================
+
+   create an object using another object. we can inherit the data from one ovject to another object.
+
+example
+===============
+
+var bank = {
+  name:"sbi",
+  ifsc:1234
+  branch:"chandanagar"
+}
+
+var customer = Object.create(bank);
+
+customer.username = "nalini"
+customer.accno=1234567;
+customer.balance = 9000;
+
+console.log(customer)
+// The output is {"username:"nalini",accno:1234567, balance:9000}
+
+//we can access parant bank elements as well
+console.log(cutomer.name) //output is sbi
+
+// This means bank is parent and customer is child object
+// we can get parent data to child but not possible vice versa
+
+Synchronous and Asynchronous operations
+======================================
+
+Synchronous means Sequential execution
+
+Example:
+====
+
+var a =20;
+var b =30;
+
+function Synchronous(a,b){
+  console.log(a+b);
+}
+Synchronous(a,b);
+
+
+Asynchronous example
+==============
+
+  we have not only setTimeout ti achieve the asynchronous functionality.
+   We have some inbuilt http methods to achieve asychronous operations.
+
+
+function asynchronous(){
+
+  // the settimeout will execute the function after 1sec(1000milliseconds)
+  setTimeOut(function(){
+    console.log("step1)
+  },1000);
+ console.log("step2");
+
+}
+
+asynchronous();
+
+//output is 
+//step2 after 1000ms step1 will print

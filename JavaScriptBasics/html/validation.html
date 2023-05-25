@@ -1,0 +1,71 @@
+<html>
+
+<head>
+    <h1>Form Validation</h1>
+</head>
+
+<body>
+    <form action="/cgi-bin/test.cgi" name="myForm" onsubmit="return(validate());">
+        <table cellspacing="2" cellpadding="2" border="1">
+            <tr>
+                <td align="right">Name</td>
+                <td><input type="text" name="Name" /></td>
+            </tr>
+
+            <tr>
+                <td align="right">Email</td>
+                <td><input type="text" name="Email" /></td>
+            </tr>
+            <tr>
+                <td align="right">ZipCode</td>
+                <td><input type="text" name="Zip" /></td>
+            </tr>
+
+            <tr>
+                <td align="right">Country</td>
+                <td>
+                    <select name="Country">
+                        <option value="-1" selected>[choose yours]</option>
+                        <option value="1">INDIA</option>
+                        <option value="2">USA</option>
+                        <option value="3">UK</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td rowspan="2"><input type="submit" value="Submit"></td>
+            </tr>
+        </table>
+    </form>
+    <script type="text/javascript">
+        function validate() {
+            console.log("calling the function");
+            if (document.myForm.Name.value == "") {
+                alert("please enter the name");
+                document.myForm.Name.focus();
+                return false;
+            }
+
+            if (document.myForm.Email.value == "") {
+                alert("please enter the Emai");
+                document.myForm.Email.focus();
+                return false;
+            }
+
+            if (document.myForm.Zip.value == "" || isNaN(document.myForm.Zip.value) || document.myForm.Zip.value.length != 5) {
+                alert("Please provide a zip in the format #####.")
+                document.myForm.Zip.focus();
+                return false;
+            }
+
+            if (document.myForm.Country.value == -1) {
+                alert("Please select the country")
+                document.myForm.Country.focus();
+                return false;
+            }
+            return (true);
+        }
+    </script>
+</body>
+
+</html>

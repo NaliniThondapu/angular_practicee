@@ -1,0 +1,25 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <button id="button">Click The Button</button>
+    <script>
+        var button = document.getElementById("button")
+        button.onmousedown = () => {
+            button.style.backgroundColor = 'red';
+        }
+        button.onmouseup = () => {
+            button.style.backgroundColor = "green"
+        }
+        button.ondblclick = () => {
+            button.style.height = "200"
+            button.style.width = "200"
+            button.style.backgroundColor="yellow"
+        }
+    </script>
+</body>
+
+</html>

@@ -17,6 +17,10 @@ Mouse Events:
 5.  onmouseup -- when the mouse button is releases over the element
 6.  onmousemove -- when the mouse movement takes place
 7.  ondbclick -- when the mouse double click on an element
+8.  onauxclick -- when the user clicks the auxillary mouse button (that is middle mouse button)
+9.  onmouseenter -- when the mouse pointer is moved onto an element
+10. onmouseleave -- when the pointer is moved out of an element
+11. oncopy -- when the user starts a copy process in the browser
 
 keyboardEvents
 =======
@@ -37,13 +41,22 @@ window/Document events
 2.  onunload -- when the visitor leaves the current page , the browser unloads it
 3.  onresize -- when the visitor resizes the window of the browser
 
+OtherEvents:
+========
 
-addEventListener()
+1. onabort --- this event is triggered when an image or video on a webpage fails to load
+2.  oncanplay -- 
+
+
+addEventListener() , removeEventListener()
 ===========
    This method is used to attach an event handler to a perticular element.
+   where as the removeEventListener() method is used to remove the events from the perticular element.
+   Please check the example as well get idea for interview questions as well.
 syntax:
 ========
 element.addEventListener(event, function, useCapture);  
+element.removeEventListener(eventname,function)
 
 Event:
     It is a required parameter. we need to specify the event name.
@@ -54,3 +67,224 @@ useCapture:
     in the bubbling or capturing phase. It's possible values are true and false. 
     When it is set to true, the event handler executes in the capturing phase.
     When it is set to false, the handler executes in the bubbling phase. Its default value is false.
+
+Example on add and event listener:
+===================================
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <button id="one">One</button>
+    <button id="two">Two</button>
+    <button id="test" onclick="test()">Test</button>
+
+    <script>
+        var btnOne = document.getElementById("one")
+
+        //Adding and removing events dynamically
+        //In this way we can add multiple event for the
+        btnOne.addEventListener("click", f1);
+        function f1() {
+            alert("function f1 got called");
+        }
+        btnOne.addEventListener("click", function(){
+            alert("First Anonymous function")
+        },false);
+        //we can not remove anonymous eventListerners 
+        //to remove this type unless we need to store the function reference to a variable like below
+        btnOne.addEventListener("click", btnOne.fn = function(){
+            alert("second anonymouc fun with ref variable to function")
+        },false);
+
+         //we deleting like below
+         //btnOne.removeEventListener("click",btnOne.fn,false)
+       
+
+
+        var btnTwo = document.getElementById("two");
+        btnTwo.addEventListener("click", f2)
+        var btnTest = document.getElementById("test");
+
+        function f2() {
+            alert("Function f2 got called");
+            btnOne.removeEventListener("click", f1);
+            // we removed the event which is added by addeventlistener
+            //so it will not work anything on two button once it is executed
+            alert("Event on button one got removed");
+            //here test buttone onclick event is not added by addeventListener
+            //I am trying to delete that event
+            //here it will remove but on click the test function it will as is
+            //why because the event is created directly on the button not by addEventlistener
+            btnTest.removeEventListener("click", test);
+            alert("Event on test button got removed")
+            btnOne.removeEventListener("click",btnOne.fn,false)
+            alert("Second anonymous function listener got removed")
+
+            
+
+        }
+
+        function test() {
+            alert("test function onclick event");
+        }
+
+
+    </script>
+</body>
+
+</html>
+
+
+
+EventBubbling
+======================
+
+  If we are trying to have same type of event on parent tag as well , the events will be executed from child to parent.
+This means if parent and child tags all have same type of event , then if we click on the child tag it will execute the the same events 
+of parent element as well.
+
+    But, If we click on parent event, it will not execute the child events.This is default behaviour.
+
+Example
+
+<html>
+
+<head>
+    <!--hear body *  menas will apply the same style to paraent and its childs as well -->
+    <style>
+        
+        body *{
+            margin:10px;
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Here form is parent and div ,p are childs all have sam onclick event-->
+    <form onclick="form()">FORM
+        <div onclick="div()">DIV
+            <p onclick="p()">P</p>
+        </div>
+    </form>
+
+    <script>
+        function form() {
+            alert("form")
+        }
+        function div() {
+            alert("div")
+        }
+        function p() {
+            alert("p")
+        }
+    </script>
+</body>
+
+</html>
+
+
+Event capturing
+=================
+
+    This is reverse to EventBubbling , this will execute the same type of event from parent to child.
+    We need enable the flag as true , to enable the capture.
+
+Example
+=============
+
+<html>
+
+<head>
+<style>
+    body *{
+        margin:20px;
+        border: 2px solid blue;
+    }
+</style>
+</head>
+
+<body>
+    <form id="form">FORM
+        <div id="div">DIV
+            <p id="p">P</p>
+        </div>
+    </form>
+
+    <script>
+        var form = document.getElementById("form");
+        var div = document.getElementById("div");
+        var p = document.getElementById("p");
+
+        p.addEventListener("click",function(){
+            alert("P")
+        },{capture:true});
+
+        div.addEventListener("click",function(){
+            alert("div")
+        },{capture:true});
+
+        form.addEventListener("click",function(){
+            alert("form")
+        },{capture:true});
+
+
+    </script>
+</body>
+
+</html>
+
+
+Stop Propagation
+=========================
+
+   This will stop propagating from child element to parent element i.e we can avoid Event bubbling.
+
+Example
+-------
+
+<html>
+
+<head>
+    <!--hear body *  menas will apply the same style to paraent and its childs as well -->
+    <style>
+        
+        body *{
+            margin:10px;
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Here form is parent and div ,p are childs all have sam onclick event-->
+    <form onclick="form()">FORM
+        <div onclick="div()">DIV
+            <p id ="p">P</p>
+        </div>
+    </form>
+
+    <script>
+        function form() {
+            alert("form")
+        }
+        function div() {
+            alert("div")
+        }
+        var p = document.getElementById("p");
+        p.addEventListener("click",function(){
+            alert("p");
+            event.stopPropagation();
+            //This will stop propagating from child element to parent element i.e we can avoid Event bubbling.
+            //This means it will stop from "P" tag to "form" tag only.
+            
+        })
+    </script>
+</body>
+
+</html>

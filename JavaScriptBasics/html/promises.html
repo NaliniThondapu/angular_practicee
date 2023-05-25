@@ -1,0 +1,46 @@
+<html>
+
+<head>
+  <H1>Promises</H1>
+</head>
+
+<body>
+  <script>
+    const getPostById = (postId) => {
+      return new Promise((resolve, reject) => {
+        fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`)
+          .then(response => {
+            if (!response.ok) {
+              reject(`Error:${response.status}`)
+            }
+            return response.json();
+          }).then(post => {
+            return new Promise((resolve, reject) => {
+              fetch(`https://jsonplaceholder.typicode.com/posts/${post.userId}`)
+                .then(response => {
+                  if (!response.ok) {
+                    reject(`Error:${response.status}`)
+                  }
+                  return response.json();
+                }).then(user => {
+                  resolve(user);
+                }).catch(error => reject(error));
+            })
+          }).then(postWithUser => {
+            resolve(postWithUser)
+          }).catch(error => reject(error))
+      })
+    }
+
+    getPostById(1)
+      .then(post => {
+        console.log(post);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+
+  </script>
+</body>
+
+</html>

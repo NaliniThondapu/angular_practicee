@@ -1,0 +1,34 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <script>
+        //get the body tag
+        var body = document.getElementsByTagName("body")
+
+        //create the form element
+        var form = document.createElement("form");
+
+        //create the input type
+        var input = document.createElement("input")
+        input.type = "text"
+        input.placeholder = "Enter username"
+        input.style = "margin-right: 10px"
+
+        //create the buttom
+        var button = document.createElement("button")
+        button.value = "Submit"
+        button.innerHTML = "submit"
+
+        //append the button and input to form
+        form.appendChild(input)
+        form.appendChild(button)
+        //append form to the button
+        body[0].appendChild(form)
+    </script>
+</body>
+
+</html>

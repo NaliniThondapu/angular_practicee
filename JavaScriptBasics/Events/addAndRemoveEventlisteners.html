@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <button id="one">One</button>
+    <button id="two">Two</button>
+    <button id="test" onclick="test()">Test</button>
+
+    <script>
+        var btnOne = document.getElementById("one")
+
+        //Adding and removing events dynamically
+        //In this way we can add multiple event for the
+        btnOne.addEventListener("click", f1);
+        function f1() {
+            alert("function f1 got called");
+        }
+        btnOne.addEventListener("click", function(){
+            alert("First Anonymous function")
+        },false);
+        //we can not remove anonymous eventListerners 
+        //to remove this type unless we need to store the function reference to a variable like below
+        btnOne.addEventListener("click", btnOne.fn = function(){
+            alert("second anonymouc fun with ref variable to function")
+        },false);
+
+         //we deleting like below
+         //btnOne.removeEventListener("click",btnOne.fn,false)
+       
+
+
+        var btnTwo = document.getElementById("two");
+        btnTwo.addEventListener("click", f2)
+        var btnTest = document.getElementById("test");
+
+        function f2() {
+            alert("Function f2 got called");
+            btnOne.removeEventListener("click", f1);
+            // we removed the event which is added by addeventlistener
+            //so it will not work anything on two button once it is executed
+            alert("Event on button one got removed");
+            //here test buttone onclick event is not added by addeventListener
+            //I am trying to delete that event
+            //here it will remove but on click the test function it will as is
+            //why because the event is created directly on the button not by addEventlistener
+            btnTest.removeEventListener("click", test);
+            alert("Event on test button got removed")
+            btnOne.removeEventListener("click",btnOne.fn,false)
+            alert("Second anonymous function listener got removed")
+
+            
+
+        }
+
+        function test() {
+            alert("test function onclick event");
+        }
+
+
+    </script>
+</body>
+
+</html>

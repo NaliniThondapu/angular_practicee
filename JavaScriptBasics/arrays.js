@@ -161,3 +161,17 @@ const f = fruits3.entries();
 for (let x of f) {
   console.log(x)
 }
+
+
+var emp1 = {
+  name:"nalini",
+  deatils:function(role,exp,certified){
+    return this.name+" "+role+" "+exp+" "+certified;
+  }
+}
+
+var emp2 ; {
+  name:"rama"
+}
+
+emp1.deatils.bind(emp1)
