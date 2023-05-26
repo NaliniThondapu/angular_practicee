@@ -1,0 +1,8 @@
+<h1>ngFor</h1>
+<div>
+  UserName:<input type=" text" [(ngModel)] = "username">
+  <button (click) = "adduser()">Add User</button>
+  <ul>
+    <li *ngFor = "let user of users">{{user}}</li>
+  </ul>
+</div>

@@ -1,0 +1,26 @@
+<!-- if -->
+<P> If Example</P>
+<div *ngIf = "show">
+  <p>The show flag is true </p>
+</div>
+
+<!-- if else-->
+<p>If Else Example</p>
+<div *ngIf = "users.length > 0 then haveData else noData">
+
+</div>
+
+<ng-template #haveData>
+  <ul>
+    <p>We have User Data</p>
+    <li *ngFor="let user of users">{{user}}</li>
+  </ul>
+
+</ng-template>
+
+<ng-template #noData>
+
+  <p>We do not have User Data</p>
+
+
+</ng-template>

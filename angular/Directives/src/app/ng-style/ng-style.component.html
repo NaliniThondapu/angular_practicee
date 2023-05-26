@@ -1,0 +1,14 @@
+<h1>Ng Style</h1>
+
+<!-- this is normal style binding-->
+<h1 [style.backgroundColor] = "true? 'red':'green'"
+[style.color] = "true?'white':'black'"
+[style.textAlign] = "true?'center':'right'">Hello World</h1>
+
+<!-- style binding-->
+<h1
+[ngStyle] ="{
+  backgroundColor:true?'red':'green',
+  color:true?'white':'black',
+  textAlign:true?'center':'right'
+}">Hello world</h1>

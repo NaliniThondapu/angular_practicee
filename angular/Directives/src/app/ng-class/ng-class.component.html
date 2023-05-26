@@ -1,0 +1,12 @@
+<h1>ngClass</h1>
+<h1 class = "bgcolor color center">This is the header</h1>
+
+<!-- we can write the same in another way using class binding-->
+<h1 [class.bgcolor] ="true" [class.color] ="true" [class.center] ="true">This is the header</h1>
+
+<!-- we can write the same using ngclass-->
+<h1 [ngClass]="{
+  bgcolor:true,
+  color:true,
+  center:true
+}"> This is the header<h1>

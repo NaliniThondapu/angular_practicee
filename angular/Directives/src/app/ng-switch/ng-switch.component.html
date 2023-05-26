@@ -1,0 +1,12 @@
+<select name="" id="" [(ngModel)]="selectedVal">
+  <option value=""></option>
+  <option *ngFor="let user of users">{{user.name}}</option>
+</select>
+
+
+<div [ngSwitch]="selectedVal">
+  <div *ngSwitchCase="'nalini'">Nalini Selected</div>
+  <div *ngSwitchCase="'nagini'">Nagini Selected</div>
+  <div *ngSwitchCase="'rama'">Rama Selected</div>
+  <div *ngSwitchDefault>Please selct the proper option</div>
+</div>
