@@ -1,0 +1,29 @@
+<h1>form-validations works!</h1>
+
+<form action="" [formGroup]="loginForm" class="form-group" (ngSubmit) = "formSubmit(loginForm)">
+  UserName:<input type="text" class="form-control" formControlName="username" id="username"
+    placeholder="Enter userName"><br><br>
+  <span *ngIf="f['username'].touched && f['username'].invalid">
+    <span *ngIf="f['username'].errors && f['username'].errors['required']" style="color: red;">UserName is
+      Required</span>
+    <span *ngIf="f['username'].errors && f['username'].errors['minlength']" style="color: red;">UserName Should have
+      Minimum 5 Chars</span>
+  </span>
+
+  Password:<input type="password" class="form-control" formControlName="password" id="password"
+    placeholder="Enter password">
+  <span *ngIf="f['password'].touched && f['password'].invalid">
+    <span *ngIf="f['password'].errors && f['password'].errors['required']"
+      style="margin: left 10px;color: red;">password is
+      Required</span><br>
+    <span *ngIf="f['password'].errors && f['password'].errors['minlength']" style="color: red;">password Should have
+      Minimum 5 Chars</span><br>
+  </span>
+
+  <div formGroupName="Address">
+    state:<input type="text" formControlName="state" name="state"><br><br>
+    city:<input type="text" formControlName="city" name="city">
+  </div>
+  <button [disabled]="loginForm.invalid">Submit</button>
+
+</form>

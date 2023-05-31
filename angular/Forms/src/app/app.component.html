@@ -1,0 +1,32 @@
+<h1> Template Driven Forms</h1>
+<form action="" #loginForm="ngForm">
+  UserName:
+  <input type="text"
+  ngModel #username="ngModel" name="username" required minlength='5' maxlength="5">
+  <span *ngIf = "username.touched && username.invalid">
+    <span *ngIf = "username.hasError('required')" style="margin-left: 10px; color: red;">username is mandatory</span>
+    <span *ngIf = "username.hasError('minlength')">UserName should contain minimum of 5 chars</span>
+    <span *ngIf = "username.hasError('maxlength')">UserName should Not contain more than of 5 chars</span>
+  </span>
+
+  <br><br>
+
+  Password:
+  <input type="password"
+  ngModel #password="ngModel" name="password" required minlength='5' maxlength="5">
+  <span *ngIf = "password.touched && password.invalid">
+    <span *ngIf = "password.hasError('required')" style="margin-left: 10px; color: red;">password is mandatory</span>
+    <span *ngIf = "password.hasError('minlength')">password should contain minimum of 5 chars</span>
+    <span *ngIf = "password.hasError('maxlength')">password should Not contain more than of 5 chars</span>
+  </span>
+
+  <br><br>
+
+  <!-- this button is enabled if all the form fields are valid as per the validations-->
+  <button [disabled]="loginForm.invalid">Submit</button>
+</form>
+
+<!-- <app-reactive-form-component></app-reactive-form-component> -->
+<!-- <app-form-validations></app-form-validations> -->
+
+<app-dynamic-controls></app-dynamic-controls>

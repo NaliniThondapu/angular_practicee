@@ -1,0 +1,23 @@
+<h1>Products Which will get data from the Praent</h1>
+<div *ngFor="let product of parentProducts">
+  {{product.id}}
+  {{product.name}}
+</div>
+
+<div>
+  {{versionName}}
+</div>
+
+<div>
+  <h1>Jokes</h1>
+  <ul *ngFor=" let joke of jokes">
+    <li>{{joke}}</li>
+  </ul>
+</div>
+
+<div>
+  <h1>Puns</h1>
+  <ul *ngFor=" let pun of puns">
+    <li>{{pun}}</li>
+  </ul>
+</div>

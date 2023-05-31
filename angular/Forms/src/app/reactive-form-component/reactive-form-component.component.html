@@ -1,0 +1,12 @@
+<h1>reactive-form-component works!</h1>
+
+<form [formGroup] = "basicForm" class="form-group" (ngSubmit)="fsubmit()">
+  UserName:<input type="text" class="form-control" formControlName="uname"><br><br>
+  Password:<input type="password" class="form-control" formControlName="pwd"><br><br>
+  <button [disabled] = "basicForm.invalid">Submit</button>
+
+</form>
+
+
+
+
