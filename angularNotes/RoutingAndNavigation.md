@@ -1,4 +1,15 @@
-## Routing And Navigation
+## Routing And Navigation 
+-  **Check the videos of Mar first and sixth for the below conecpts**. Below are the concepts of Routing and navigation. Cannot able to write the notes for some points. In case of doubts need to check the videos.
+- Routing in a NutShell
+- Configuring routes
+- Router Outlet
+- Router link
+- Default route
+- Not-found route
+- Programatic navigation
+- Route Parameters
+- Nested routes
+- Named Router Outlet
 ## BootStrap
   - Bootstrap is the most popular CSS Framework for developing responsive and websites.
   - To inject this in our angular we need to include below few in the head of section of **index.html**
@@ -31,4 +42,7 @@
 ## routerLink
  - This is to link the path , to which component we can communicate when click on this.
  - **router-outlet** is used to check the path.
+
+## Route Parameters
+
  
