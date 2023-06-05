@@ -1,0 +1,31 @@
+<h1 class="text-center">Users DashBoard</h1>
+<div>
+  <table class="table table-boardered">
+    <tr class="bg-primary">
+      <th>ID</th>
+      <th>Name</th>
+      <th>User Name</th>
+      <th>Email</th>
+      <th>City</th>
+    </tr>
+    <tr>
+      <td>{{user.id}}</td>
+      <td>{{user.name}}</td>
+      <td>{{user.username}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.address.city}}</td>
+    </tr>
+  </table>
+</div>
+
+<div>
+  <ul class="nav nav-tab">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="address">Address</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="company">Company</a>
+    </li>
+  </ul>
+<router-outlet></router-outlet>
+</div>

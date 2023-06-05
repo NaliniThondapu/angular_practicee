@@ -1,0 +1,5 @@
+<form [formGroup]="basicForm" class="form-group" (ngSubmit)="fsubmit()">
+  UserName : <input type="text" [(ngModel)]="uname" class="form-control" formControlName="uname"><br><br>
+  Password:<input type="password" [(ngModel)]="pwd" class="form-control" formControlName="pwd"><br><br>
+  <button class="btn btn-primary">Submit</button>
+</form>

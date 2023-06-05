@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="login">Login</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="register">Register</a>
+    </li>
+    <li class="nav-item">
+      <!-- named routers for contact we need to display another two components Map and feedback-->
+      <a class="nav-link" [routerLink]="['/contact',{
+        outlets:{
+          'map':['map'],
+          'feeds':['feedback']
+        }
+ }]">Contact</a>
+
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="about">About</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="users">Users</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="resolve">Resolve Guard</a>
+    </li>
+  </ul>
+
+</nav>
