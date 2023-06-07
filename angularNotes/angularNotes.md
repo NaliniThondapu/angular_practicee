@@ -12,7 +12,7 @@ ng generate service <servicename> -- is used to create the services
 ng generate pipe <pipes name> --- is used to generate the pipes
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned ----- this command is used in case of any execution policy error for powershell. we need open the power shell as administrator and then select A(for all) then enter.
 
-ng g m orders -- route orders --module app.module -- generate the module orders ,create the route file  for orders module and this module will create under appmodule
+ng g m orders --route orders --module app.module -- generate the module orders ,create the route file  for orders module and this module will create under appmodule
 
 ```
 
