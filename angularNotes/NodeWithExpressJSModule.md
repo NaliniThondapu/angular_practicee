@@ -30,6 +30,18 @@ ng new ProductAPI
 ```
  npm add express --save
  npm add mysql --save
+ //some time mysql will get Error: ER_NOT_SUPPORTED_AUTH_MODE error in that case use mysql2
+ npm add mysql2
+ //to uninstall any package command like below
+ npm un mysql2
+ 
+ //any previlize error
+ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
+FLUSH PRIVILEGES
+
+//to start node server
+node server (here server is nothing but not a command our server.js file name)
+ 
  npm add body-parser --save
 ```
 
@@ -123,15 +135,155 @@ var connection = dbcon.getConnection();
 //this will open the connection
 connection.connect();
 
-//import the express module
+//import the express
 var express = require("express")
 var router = express.Router();
 
+//Read Endpoint
+
+//first paramter is url here i am using "/"
+//second param is req and res arrow function
+//the query method also has two prams first one is query and second one callback function
+router.get("/", (req, res) => {
+connection.query("use mydb")
+  connection.query("select * from product", (err, records, recordFields) => {
+    if (err) {
+      console.err("Error while fetching the data")
+    } else {
+      res.send(records)
+    }
+  })
+})
+
+module.exports=router
 
 ```
 
+## start NodeJs server
+-create **server.js** which will act as a bootstarp our application to kick start of our application.
 
 
+## server.js
+
+```
+//here "express" is a module
+var express = require("express")
+
+
+
+//create an instance(object) of app is like the root for our application
+var app = express();
+
+var productAPI = require("./controllers/product.controller")
+app.use("/app/products", productAPI)
+app.listen(8080);
+console.log("Server up and running on 8080")
+
+```
+
+## get the product by id API
+
+## product.controller.js
+```
+//get the product by id
+router.get("/:id", (req, res) => {
+  console.log("Inside the api")
+  connection.query("use mydb")
+  connection.query("select * from product where id ="+req.params.id, (err, records, recordFields) => {
+    if (err) {
+      console.error("Error while fetching the data",err)
+    } else {
+      res.send(records)
+    }
+  })
+})
+```
+
+## add the product API
+
+## product.controller.js
+```
+//add the product
+//for this post we need to use the body parser
+//that was added in server.js
+router.post("/", (req, res) => {
+  console.log("Inside the api")
+  var id = req.body.id
+  var name = req.body.name
+  var description = req.body.description
+  var price = req.body.price
+  connection.query("use mydb")
+  connection.query("insert into product values(" + id + ",'" + name + "','" + description + "'," + price + ")", (err, result) => {
+    if (err) {
+      console.error("Error while inserting the data", err)
+    } else {
+      res.send({ insert: "success" })
+    }
+  })
+})
+
+```
+
+## server.js
+```
+//here "express" is a module
+var express = require("express")
+var bodyParser = require("body-parser")
+
+
+
+//create an instance(object) of app is like the root for our application
+var app = express();
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:false}))
+//or
+//app.use(express.urlencoded({extended:false}))
+//app.use(express.json())
+
+
+var productAPI = require("./controllers/product.controller")
+app.use("/api/products", productAPI)
+app.listen(8080);
+console.log("Server up and running on 8080")
+
+```
+
+## update and delete APIs
+## product.controller.js
+
+```
+//update the product
+router.put("/", (req, res) => {
+  console.log("Inside the api")
+  var id = req.body.id
+  var name = req.body.name
+  var description = req.body.description
+  var price = req.body.price
+  connection.query("use mydb")
+  connection.query("update product set name=" + "'" + name + "', description=" + "'" + description + "'" + "where id=" + id, (err, result) => {
+    if (err) {
+      console.error("Error while inserting the data", err)
+    } else {
+      res.send({ insert: "success" })
+    }
+  })
+})
+
+
+//delete the product by id
+router.delete("/:id", (req, res) => {
+  console.log("Inside the api")
+  connection.query("use mydb")
+  connection.query("delete from product where id =" + req.params.id, (err, records, recordFields) => {
+    if (err) {
+      console.error("Error while deleting the data", err)
+    } else {
+      res.send({ response: "success" })
+    }
+  })
+})
+
+```
 
 
 
