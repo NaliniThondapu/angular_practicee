@@ -42,11 +42,12 @@
 
 ```
 
-## Reactive Forms
+## Reactive Forms or Model Driven Forms
 - These are flexible to perfom the validations and it is flexible to pass the data from componen to UI.
 - To work with these **ReactiveFormsModule** must import.
 - while working with these we mostly use the FormBuilder , FormGroup,FormArray,FormControl,Validators 
 - The **FormGroup** accepts the object with key and values.
+- the FormGroup is valid when all the form controls are valid basing on the validations
 
 ## app.module.ts
 
