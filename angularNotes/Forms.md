@@ -2,12 +2,22 @@
 - In angular we have two different types of forms
 
 - TemplateDriven Forms
-- Reactive Forms
+- Reactive Forms or Model driven forms
+- Template Driven Forms drive the form using html directives. These are internally model driven forms only.
+- where as in model driven forms we can build the form into Model(component) and drove into the html.
 
 ## Template Driven Forms
 - These are used to perfom the validations on the form fields
 - The **[(ngModel)]="fieldname"** we can also declare like **ngModel #username="ngModel"**
 - To work with template driven forms we need to import **Forms** module.
+- Here ngForm directive is nothingbut FormGroup like in reactive forms
+- Where as ngModel and name directive ngModel creates form control object and name maps the property of the component
+
+```
+<input ngModel name="fname">
+//ngModel and name are directives
+//fname is component property name
+```
 
 ## Example
 
