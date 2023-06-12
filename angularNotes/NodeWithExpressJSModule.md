@@ -285,6 +285,18 @@ router.delete("/:id", (req, res) => {
 
 ```
 
+## In case of any CORS related error while accessig these APIs from angular need to run the below commands. These commnds need to run on NODE side API project
+## refer the linke for the CORS(cross origin request sharing) error
+## https://www.angularjswiki.com/angular/origin-http-localhost4200-has-been-blocked-by-cors-policy-in-angular-error/
+
+```
+> npm install cors --save
+
+var cors = require('cors');
+app.use(cors());
+```
+
+
 
 
 
