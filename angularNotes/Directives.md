@@ -428,6 +428,9 @@ export class CustomIfDirective {
 
   constructor(private tempRef:TemplateRef<any>,private vcr:ViewContainerRef) { }
 
+//the name must be the selector name
+  //if you want to give the required name need to do like below
+  // @Input('appCustomIf') set customIf(condition:boolean){
   @Input() set appCustomIf(shouldAdd:boolean){
     if(shouldAdd){
       this.vcr.createEmbeddedView(this.tempRef)
@@ -437,3 +440,147 @@ export class CustomIfDirective {
 }
 
 ```
+
+## custom for directive
+
+```
+import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+
+@Directive({
+  selector: '[appMyFor]'
+})
+export class MyForDirective {
+
+  constructor(private templateRef: TemplateRef<any>, private container: ViewContainerRef) { }
+
+  @Input('appMyFor') set customFor(num: number) {
+    console.log("Inside For")
+    for (var i = 0; i < num; i++) {
+      this.container.createEmbeddedView(this.templateRef)
+    }
+
+  }
+
+}
+
+
+```
+
+## custom-directives.component.html
+
+```
+<div *appMyIf="true">
+  <b>You are the creator of your destiny</b>
+</div>
+
+<ul>
+  <li *appMyFor="4">You are awesome!!!</li>
+</ul>
+
+```
+
+
+## MyStyle Directive Example
+
+## myStyle.directive.ts
+```
+import { Directive, ElementRef } from '@angular/core';
+
+@Directive({
+  selector: '[appMyStyle]'
+})
+export class MyStyleDirective {
+
+  constructor(private eleRef:ElementRef) {
+    eleRef.nativeElement.style.color="red"
+    eleRef.nativeElement.style.backgroundColor="yellow"
+    eleRef.nativeElement.style.fontSize="20px"
+   }
+}
+```
+
+## custom-directives.component.html
+
+```
+<div *appMyIf="true">
+  <b>You are the creator of your destiny</b>
+</div>
+
+<ul>
+  <li *appMyFor="4">You are awesome!!!</li>
+</ul>
+
+<h1 appMyStyle>All the Power is with in you</h1>
+
+```
+## Pass the data to the custom directives
+
+## myStyle.directive.ts
+```
+import { Directive, ElementRef, Input } from '@angular/core';
+
+@Directive({
+  selector: '[appMyStyle]'
+})
+export class MyStyleDirective {
+
+  @Input() fontSize: string = ""
+  constructor(private eleRef: ElementRef) {
+    eleRef.nativeElement.style.color = "red"
+    eleRef.nativeElement.style.backgroundColor = "yellow"
+    eleRef.nativeElement.style.fontSize = "20px"
+  }
+
+//this is one of life cycle method
+  ngAfterViewInit(): void {
+    this.eleRef.nativeElement.style.fontSize = this.fontSize
+  }
+
+}
+
+```
+
+## custom-directives.component.html
+
+```
+<div *appMyIf="true">
+  <b>You are the creator of your destiny</b>
+</div>
+
+<ul>
+  <li *appMyFor="4">You are awesome!!!</li>
+</ul>
+
+<h1 appMyStyle fontSize="80px">All the Power is with in you</h1>
+
+```
+
+## handle the events to the custom attribute directives
+
+## myStyle.directive.ts
+```
+import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+
+@Directive({
+  selector: '[appMyStyle]'
+})
+export class MyStyleDirective {
+
+  @Input() fontSize: string = ""
+  constructor(private eleRef: ElementRef) {
+    eleRef.nativeElement.style.color = "red"
+    eleRef.nativeElement.style.backgroundColor = "yellow"
+    eleRef.nativeElement.style.fontSize = "20px"
+  }
+
+  ngAfterViewInit(): void {
+    this.eleRef.nativeElement.style.fontSize = this.fontSize
+  }
+
+  @HostListener('mouseenter') onMouseEnter(){
+    this.eleRef.nativeElement.style.backgroundColor = "blue"
+  }
+}
+
+```
+
