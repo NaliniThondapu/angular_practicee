@@ -157,13 +157,17 @@ spring.datasource.password=root
 ```
 package com.nalini.flightServices.integration;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nalini.flightServices.dto.CreateReservationRequest;
@@ -174,8 +178,14 @@ import com.nalini.flightServices.entities.Reservation;
 import com.nalini.flightServices.repos.FlightRepository;
 import com.nalini.flightServices.repos.PassengerRepository;
 import com.nalini.flightServices.repos.ReservationRepository;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
+
+//the crossorigin is required if different applications on different ports to communicate eachother
+//For example if angular will run on 4200 and this app will run on 8080 with out this annoation if we are trying to access
+//rest endpoints will get cross origin error to avoid that we need to add this annotation
+@CrossOrigin
 public class ReservationRestController {
 
 	@Autowired
@@ -192,11 +202,20 @@ public class ReservationRestController {
 		return flightRepo.findAll();
 	}
 
+	// sample API call
+	// http://localhost:8080/flightServices/flightsByDepartureTime?from=AUS&to=NYC&dateOfDeparture=09-05-2023
+	@RequestMapping(value = "/flightsByDepartureTime", method = RequestMethod.GET)
+	public List<Flight> findFlightsByCityAndDate(@RequestParam("from") String from, @RequestParam("to") String to,
+			@RequestParam("dateOfDeparture") @DateTimeFormat(pattern = "MM-dd-yyyy") Date dateOfDeparture) {
+		return flightRepo.findFlights(from, to, dateOfDeparture);
+	}
+
 	@RequestMapping(value = "/reservations", method = RequestMethod.POST)
 	@Transactional // This annotation will take care of all these saves treated as one trasaction
 					// in
 					// case of any got failed will fail all operations otherwise all success
-	public Reservation saveReservation(CreateReservationRequest request) {
+	// request body annotation will map the incoming json request to the java object
+	public Reservation saveReservation(@RequestBody CreateReservationRequest request) {
 		Flight flight = flightRepo.findById(request.getFlightID()).get();
 
 		Passenger passenger = new Passenger();
@@ -222,14 +241,39 @@ public class ReservationRestController {
 	}
 
 	@RequestMapping(value = "/reservations", method = RequestMethod.PUT)
-	public Reservation updateReservation(UpdateReservationRequest request) {
+	public Reservation updateReservation(@RequestBody UpdateReservationRequest request) {
 		Reservation reservation = reservationRepo.findById(request.getReservationID()).get();
 		reservation.setNumberOfBags(request.getNumberOfBags());
 		reservation.setCheckedIn(request.isCheckinFlag());
 		return reservationRepo.save(reservation);
 	}
 
+	@RequestMapping(value = "/flight/{id}", method = RequestMethod.GET)
+	public Flight findFlightById(@PathVariable("id") int id) {
+		return flightRepo.findById(id).get();
+	}
+
 }
+
+```
+## step5
+- we need to provide the root path for our project in the application.properties file.
+
+## sample API call Url
+```
+http://localhost:8080/flightServices/flights
+```
+
+## application.properties
+
+```
+spring.datasource.url=jdbc:mysql://localhost:3306/reservation
+#reservation is the DB name
+spring.datasource.username=root
+spring.datasource.password=root
+
+# This is the root path of our project
+server.servlet.context-path=/flightServices
 
 ```
 
