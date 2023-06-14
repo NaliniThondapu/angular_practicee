@@ -277,3 +277,7 @@ server.servlet.context-path=/flightServices
 
 ```
 
+
+# Start create the Angular project
+
+
