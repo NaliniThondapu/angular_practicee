@@ -18,7 +18,10 @@ import { AddressComponent } from './components/address/address.component';
 import { CompanyComponent } from './components/company/company.component';
 import { MapComponent } from './components/map/map.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
-import { ResolveComponent } from './components/resolve/resolve.component'
+import { ResolveComponent } from './components/resolve/resolve.component';
+import { CrudComponent } from './components/crud/crud.component';
+import { RxjsComponent } from './components/rxjs/rxjs.component';
+import { UppercaseComponent } from './components/uppercase/uppercase.component'
 
 @NgModule({
   declarations: [
@@ -36,7 +39,10 @@ import { ResolveComponent } from './components/resolve/resolve.component'
     CompanyComponent,
     MapComponent,
     FeedbackComponent,
-    ResolveComponent
+    ResolveComponent,
+    CrudComponent,
+    RxjsComponent,
+    UppercaseComponent
   ],
   imports: [
     BrowserModule,

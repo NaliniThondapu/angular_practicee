@@ -17,6 +17,8 @@ import { adminGuard } from './guards/admin.guard';
 import { ResolveComponent } from './components/resolve/resolve.component';
 import { resolveGuard } from './guards/resolve.guard';
 import { unsavedGuard } from './guards/unsaved.guard';
+import { CrudComponent } from './components/crud/crud.component';
+import { RxjsComponent } from './components/rxjs/rxjs.component';
 
 const routes: Routes = [
   //default Path
@@ -98,7 +100,16 @@ const routes: Routes = [
     component: RegisterComponent
     // canDeactivate:[unsavedGuard]
   },
+  { path: 'orders', loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule) },
 
+  {
+    path: 'crud',
+    component: CrudComponent
+  },
+  {
+    path: 'rxjs',
+    component: RxjsComponent
+  },
   //If the user entered the wrong url need to point to not found component
   {
     path: '**',

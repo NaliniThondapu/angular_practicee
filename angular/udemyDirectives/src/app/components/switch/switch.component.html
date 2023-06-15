@@ -1,0 +1,33 @@
+<div [ngSwitch]="choice">
+  <div *ngSwitchCase="1">WithDraw</div>
+  <div *ngSwitchCase="2">Deposit</div>
+  <div *ngSwitchCase="3">Balance Check</div>
+  <div *ngSwitchDefault>Invalid Choice</div>
+</div>
+
+<!-- The expressions which are under non bindable will not evaluated-->
+<div ngNonBindable>{{choice}}</div>
+
+<table>
+  <thead>
+    <tr>
+      <td [ngStyle]="{color:'white','background-color':'black'}">FirstName</td>
+      <td>Last Name</td>
+      <td>Score</td>
+    </tr>
+  </thead>
+  <!-- using style.<csspropertyname> we can able to apply only one style at a time-->
+<!-- where as using ngStyle we can apply more than one style on the same element -->
+  <tr *ngFor="let student of students">
+    <td [style.color]="'red'">{{student.fname}}</td>
+    <td>{{student.lname}}</td>
+    <td >{{student.score}}</td>
+  </tr>
+</table>
+
+<!-- ngClass directive is used to assign perticular css class to the perticular html elements-->
+<!-- we assign object literal for this-->
+<div [ngClass]="{tdata:true}">Hello Friends</div>
+<div [ngClass]="{tdata:false}">Hello Friends</div>
+
+

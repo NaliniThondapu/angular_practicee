@@ -1,0 +1,34 @@
+{
+  "emps": [
+    {
+      "id": 1,
+      "username": "nalini",
+      "role": "manager1"
+    },
+    {
+      "id": 2,
+      "username": "shiva",
+      "role": "devops"
+    },
+    {
+      "id": 3,
+      "username": "rama",
+      "role": "dev"
+    },
+    {
+      "id": 4,
+      "username": "seetha",
+      "role": "qa"
+    },
+    {
+      "id": 5,
+      "username": "ramaseetha",
+      "role": "manager"
+    },
+    {
+      "id": 6,
+      "username": "kalpana",
+      "role": "leadxyz123"
+    }
+  ]
+}

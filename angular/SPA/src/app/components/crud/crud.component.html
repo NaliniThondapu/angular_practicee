@@ -1,0 +1,42 @@
+<div style=" margin:auto; width: 80%; padding: 50px;">
+  <button class="float-right btn btn-primary" (click)="showform()">Create Emp</button>
+
+</div>
+<div *ngIf="!showForm else actionForm" style=" margin:auto; width: 80%; padding: 50px;">
+  <table class="table table-boardered">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Role</th>
+      <th colspan="2" class="text-center">Actions</th>
+    </tr>
+    <tr *ngFor="let emp of emps;">
+      <td>{{emp.id}}</td>
+      <td>{{emp.username | titlecase}}</td>
+      <td>{{emp.role | titlecase}}</td>
+      <td><button class="btn btn-primary" (click)="editEmployee(emp.id)">Edit</button></td>
+      <td><button class="btn btn-danger" (click)="deleteEmployee(emp.id)">Delete</button></td>
+    </tr>
+
+  </table>
+
+</div>
+
+<div style=" margin:auto; width: 80%; padding: 50px;">
+  <ng-template #actionForm>
+    <form action="" [formGroup]="empForm" class="form-group">
+      ID:<input type="text" formControlName="id" class="form-control">
+      UserName:<input type="text" formControlName="username" class="form-control">
+      Role:<input type="text" formControlName="role" class="form-control">
+      <div style="text-align: center; margin-top: 10px;">
+        <button *ngIf=actionBtn class="btn btn-primary" (click)="createEmployee()"
+          [disabled]="empForm.invalid">Register</button>
+        <button *ngIf=!actionBtn style="margin-left: 10px;" class="btn btn-primary" (click)="updateEmployee()"
+          [disabled]="empForm.invalid">Update</button>
+        <button style="margin-left: 10px;" class="btn btn-warning" (click)="clearForm()">Clear</button>
+        <button style="margin-left: 10px;" class="btn btn-danger" (click)="cancelForm()">Cancel</button>
+      </div>
+    </form>
+  </ng-template>
+
+</div>

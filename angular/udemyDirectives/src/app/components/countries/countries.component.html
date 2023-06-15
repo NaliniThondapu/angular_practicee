@@ -1,0 +1,16 @@
+<table border="1" cellspacing="5px" cellpadding="5px" align="center" style="font-size: 20px;">
+  <thead style="background-color: grey;">
+    <tr>
+      <th>Name</th>
+      <th>Capital</th>
+      <th>Flag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let country of data">
+      <td>{{country.name.common}}</td>
+      <td>{{country.capital}}</td>
+      <td><img width="100px" height="50px" src="{{country.flags.png}}"></td>
+    </tr>
+  </tbody>
+</table>

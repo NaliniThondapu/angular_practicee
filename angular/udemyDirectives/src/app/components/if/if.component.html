@@ -1,0 +1,10 @@
+<b *ngIf="x<y">You are the creator of your destiny</b><br>
+<b *ngIf="myfunction()">UsingTheFunction</b><br>
+
+<div *ngIf="x<y else actionForm">
+  <b>Y is Greater</b>
+</div>
+
+<ng-template #actionForm>
+  <b>x is greater</b>
+</ng-template>

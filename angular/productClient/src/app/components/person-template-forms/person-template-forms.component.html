@@ -1,0 +1,53 @@
+<h1>Person Form Template Driven</h1>
+
+<div class="container">
+  <form #personForm="ngForm" (ngSubmit)="onSubmit(personForm.value)">
+    <div>
+      <label>First Name</label>
+      <input type="text" name="firstName" [(ngModel)]="firstName">
+    </div>
+
+    <div>
+      <label>Last Name</label>
+      <input type="text" name="lastName" [(ngModel)]="lastName">
+    </div>
+
+    <div>
+      <label>Gender</label>
+      <input type="radio" name="gender" [(ngModel)]="gender" value="male">Male
+      <input type="radio" name="gender" [(ngModel)]="gender" value="female">Female
+    </div>
+
+    <div>
+      <label>Email</label>
+      <input type="text" name="email" [(ngModel)]="email">
+    </div>
+
+    <div ngModelGroup="address">
+      <div>
+        <label>street</label>
+        <input type="text" name="street" [(ngModel)]="street">
+      </div>
+
+      <div>
+        <label>City</label>
+        <input type="text" name="city" [(ngModel)]="city">
+      </div>
+
+      <div>
+        <label>Country</label>
+        <select name="country" [(ngModel)]="country">
+          <option value="India">India</option>
+          <option value="USA">USA</option>
+          <option value="Canada">Canada</option>
+        </select>
+
+      </div>
+
+      <div>
+        <input type="submit">
+      </div>
+
+    </div>
+  </form>
+</div>

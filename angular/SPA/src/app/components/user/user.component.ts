@@ -17,6 +17,7 @@ export class UserComponent implements OnInit {
   ngOnInit(): void {
     //will get the params from the router path
     this.id = this.route.snapshot.params['id']
+    console.log(this.route.queryParams);
     this.us.getUser(this.id).subscribe(res => {
       this.user = res
     })
