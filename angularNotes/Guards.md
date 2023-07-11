@@ -26,7 +26,7 @@ ng g g <guardname>
  ##  CanActivate :
 -  This guard decides if a route can be activated (or component gets used). This guard is useful in the circumstance where the user is not authorized to navigate to the target component. Or the user might not be logged into the system
   ## CanActivateChild :
-  - This Guard decides if the user can leave the component (navigate away from the current route). This route is useful in where the user might have some pending changes, which was not saved. The CanDeactivate route allows us to ask user confirmation before leaving the component.  You might ask the user if it’s OK to discard pending changes rather than save them.
+  - This guard determines whether a child route can be activated. This guard is very similar to CanActivateGuard. We apply this guard to the parent route. The Angular invokes this guard whenever the user tries to navigate to any of its child route. This allows us to check some condition and decide whether to proceed with the navigation or cancel it.
   ##  CanDeactivate: 
   - The Angular CanDeactivate guard is called, whenever we navigate away from the route before the current component gets deactivated.
   ## canDeactivate Example
