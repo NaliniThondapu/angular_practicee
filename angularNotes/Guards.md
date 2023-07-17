@@ -23,10 +23,116 @@ ng g g <guardname>
 ```
 
 ## Types Of Guards
--  CanActivate
--  CanActivateChild
--  CanDeactivate
--  CanMatch
+ ##  CanActivate :
+-  This guard decides if a route can be activated (or component gets used). This guard is useful in the circumstance where the user is not authorized to navigate to the target component. Or the user might not be logged into the system
+  ## CanActivateChild :
+  - This guard determines whether a child route can be activated. This guard is very similar to CanActivateGuard. We apply this guard to the parent route. The Angular invokes this guard whenever the user tries to navigate to any of its child route. This allows us to check some condition and decide whether to proceed with the navigation or cancel it.
+  ##  CanDeactivate: 
+  - The Angular CanDeactivate guard is called, whenever we navigate away from the route before the current component gets deactivated.
+  ## canDeactivate Example
+
+  ## can-deactivate.guard.ts
+  ```
+import { CanActivateFn, UrlTree } from '@angular/router';
+import { UserDetailsComponent } from '../components/user-details/user-details.component';
+import { inject } from '@angular/core';
+import { GuardServiceService } from '../guard-service.service';
+
+export const canDeactivateGuard: CanActivateFn = (route, state) => {
+  const comp: GuardServiceService = inject(GuardServiceService);
+  console.log(comp);
+  return comp.canDeactivate();
+};
+
+```
+## guard-service.service.ts
+```
+import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class GuardServiceService {
+  isSaved:boolean = false;
+
+  constructor() { }
+
+  public canDeactivate(): Observable<boolean> {
+    if (!this.isSaved) {
+      const result = window.confirm('There are unsaved changes! Are   you sure?');
+      return of(result);
+    }
+    return of(true);
+  }
+}
+```
+## user-details.component.ts
+```
+import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { GuardServiceService } from 'src/app/guard-service.service';
+
+
+@Component({
+  selector: 'app-user-details',
+  templateUrl: './user-details.component.html',
+  styleUrls: ['./user-details.component.css']
+})
+export class UserDetailsComponent {
+  isSaved = false;
+  userDetailsForm: FormGroup;
+  constructor(private gs: GuardServiceService) {
+    this.userDetailsForm = new FormGroup({
+      name: new FormControl(''),
+      email: new FormControl(''),
+    });
+  }
+  ngOnInit(): void {
+  }
+
+  onSubmit() {
+    this.isSaved = true;
+    this.gs.isSaved = true;
+
+  }
+
+}
+```
+
+## app-routing.module.ts
+```
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
+import { canDeactivateGuard } from './guards/can-deactivate.guard';
+import { PageOneComponent } from './components/page-one/page-one.component';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: UserDetailsComponent,
+    canDeactivate: [canDeactivateGuard]
+  },
+  {
+    path: 'page-one',
+    component: PageOneComponent
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+```
+
+## canLoad Guard
+- We generally use this guard when we do not want to unauthorized user to be able to even see the source code of the module.
+## Example
+
+
+  
 
 ## CanActivate Example
 

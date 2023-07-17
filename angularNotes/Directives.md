@@ -1,6 +1,6 @@
 # Directives
 - A directive is an attribute that enhances the capability of HTML element.
-- Directives help to interact with th HTML DOM and perfomr the changes directly.
+- Directives help to interact with th HTML DOM and perform the changes directly.
 - There are 3 types of directives.
 
 ## Types
