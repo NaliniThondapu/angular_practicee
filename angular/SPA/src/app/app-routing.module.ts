@@ -32,6 +32,7 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
+
     path: "about",
     component: AboutComponent
   },

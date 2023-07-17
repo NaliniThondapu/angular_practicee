@@ -13,7 +13,7 @@ export class AuthService {
   }
 
   isUserAdmin(){
-    return false;
+    return true;
   }
 
 }
