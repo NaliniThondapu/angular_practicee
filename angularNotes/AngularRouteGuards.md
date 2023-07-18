@@ -1,7 +1,29 @@
-## Guards
+## RouteGuards
 - It will take care of the security of an application.
+- we can use the angualr guards to control, wheather the user has authorizd access to navigate to the routes.
 - It will check weather ther user is valid user or not to access the application or module.
 - To generate the guards we can use the below command
+
+## Types Of Guards
+- CanActivate(If we want to access perticular route , before accessing that this guard is useful to check weather the user has permissions or not to access the route).
+- CanDeactivate
+- Resolve
+- CanLoad
+- CanActivateChild
+
+  
+
+  
+
+
+
+
+
+
+
+
+
+
 ## concepts of guards
 - Route/Auth guards
 - canActivate route guard
