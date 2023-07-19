@@ -5,24 +5,11 @@
 - To generate the guards we can use the below command
 
 ## Types Of Guards
-- CanActivate(If we want to access perticular route , before accessing that this guard is useful to check weather the user has permissions or not to access the route).
-- CanDeactivate
-- Resolve
-- CanLoad
-- CanActivateChild
-
-  
-
-  
-
-
-
-
-
-
-
-
-
+- **CanActivate**(If we want to access perticular route , before accessing that this guard is useful to check weather the user has permissions or not to access the route).Guard Navigation to a route.
+- **CanDeactivate** (Guard Navigation away from the current route)
+- **Resolve**(perform route data retrival before route activation)
+- **CanLoad**(Guard Navigation to a feature module loaded asynchronously)
+- **CanActivateChild**(Guard navigation to a child route).
 
 ## concepts of guards
 - Route/Auth guards
