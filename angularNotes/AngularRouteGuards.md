@@ -7,9 +7,15 @@
 ## Types Of Guards
 - **CanActivate**(If we want to access perticular route , before accessing that this guard is useful to check weather the user has permissions or not to access the route).Guard Navigation to a route.
 - **CanDeactivate** (Guard Navigation away from the current route)
-- **Resolve**(perform route data retrival before route activation)
+- **Resolve**(perform route data retrival before route activation) -- it allows us to load data before routing to the router.
 - **CanLoad**(Guard Navigation to a feature module loaded asynchronously)
 - **CanActivateChild**(Guard navigation to a child route).
+
+  ## Imp points on guards
+  - when we use canactivate route guard on router that route guard only apply to that router. It is not applied to its child routes.
+  - when we use canactivatechild route guard on router that guard will apply for all the childs. It is not applied to the parent.
+  - Resolve route guards is allows us to load data before we navigate to a route.
+  
 
 ## concepts of guards
 - Route/Auth guards
