@@ -584,3 +584,100 @@ export class MyStyleDirective {
 
 ```
 
+## @HostListener directive
+- This decorator listenes to the DOM event on the host element and it reacts to that event by executing  an event handler method. This is custom attribute directive.
+- In the below example "appHover" is applied to the div element. So, in this div is the host element.
+
+## Example
+
+## hover.directive.ts
+
+```
+import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
+
+@Directive({
+  selector: '[appHover]'
+})
+export class HoverDirective {
+
+  constructor(private element:ElementRef , private render:Renderer2) { }
+
+//for this decorator we need to specify the DOM element event
+  @HostListener('mouseenter')
+  onMouseover(){
+    this.render.setStyle(this.element.nativeElement,"margin",'5px 10px')
+    this.render.setStyle(this.element.nativeElement,"padding",'30px 30px')
+    this.render.setStyle(this.element.nativeElement,"transition",'0.5s')
+    this.render.setStyle(this.element.nativeElement,"background-color",'green')
+
+  }
+
+  @HostListener('mouseleave')
+  onMouseout(){
+    this.render.setStyle(this.element.nativeElement,"margin",'10px 20px')
+    this.render.setStyle(this.element.nativeElement,"padding",'10px 20px')
+    this.render.setStyle(this.element.nativeElement,"transition",'0.5s')
+  }
+
+}
+
+```
+
+## app.component.html
+```
+<h1> Directives </h1>
+<div appHover>
+  <p>This is a demo HTML content to understand custom attribute directive in angular</p>
+</div>
+```
+
+## HostBinding decorator
+- This decorator binds a host element property to a variable in a direcctive or a component.
+- we are binding the property of the directive class with the peoperty of the html elements.
+
+## Example
+
+## betterhighlight.directive.ts
+```
+import { Directive, ElementRef, HostBinding, HostListener, Renderer2 } from '@angular/core';
+
+@Directive({
+  selector: '[appBetterhighlight]'
+})
+export class BetterhighlightDirective {
+
+  constructor(private element:ElementRef,private renderer:Renderer2) { }
+
+  //in this decorator we need to provide html properties to bind the property to the host element
+  @HostBinding('style.background') background :string = 'transparent'
+  @HostBinding('style.border') border :string = 'none'
+
+  @HostListener('mouseenter')
+  onmouseenter(){
+    this.background = 'pink'
+    this.border='red 2px solid'
+  }
+
+  @HostListener('mouseleave')
+  onmouseout(){
+    this.background='transparent'
+    this.border='none'
+  }
+
+}
+
+```
+
+## app.component.html
+```
+<h1> Directives </h1>
+<div class="container" appBetterhighlight>
+  <p>This is a demo HTML content to understand @Hostbinding attribute directive in angular</p>
+</div>
+
+```
+
+
+
+
+
