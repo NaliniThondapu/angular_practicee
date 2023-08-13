@@ -78,14 +78,16 @@ let fileContent = `My Name is Nalini \n Date created ${new Date()}`
 fs.writeFileSync('./files/output.txt',fileContent)
 
 ```
+
+
 ## Reading and Writing files Asynchronously
 ## Asynchronous Nature Of NODE JS
 - Synchronous execution means the code will execute line by line.
 - If any line of the code takes more time to complete that , then the execution of next line is blocked.
 
   ## Example
-  ```
-  //to read or files from node js we need fs module
+```
+//to read or files from node js we need fs module
 //first we need to import
 
 const fs = require('fs')
@@ -108,9 +110,144 @@ fs.readFile('./files/start.txt', 'utf-8', (err, data) => {
   })
 })
 console.log("Reading file...")
+```
+## create a Simple webserver
+- It is capable of accepting the requests and sending back the responses.
+
+## Example
+```
+//to create the webserver in Nodejs first we need to import the http module
+const http = require('http')
+
+
+//Step1 : CREATE A SERVER
+//we need to pass callback function. This call back function will executes everytime
+//a new request hit the server
+//when the new request hits the server this callback function receieves two params
+//request and response objects
+
+//this method returns the server object
+const server =  http.createServer((request,response)=>{
+  console.log("A New req is receieved")
+  console.log(request)
+  //we can send back the response to the request
+  response.end("Hello response from the server")
+
+})
+
+
+//STEP2: START THE SERVER
+//It aacepts two params one is port number and the second one is host
+//The third parameter is optional,this call back executes as soon as the server start listening the requests
+server.listen(8000,'127.0.0.1',()=>{
+  console.log("Server has started")
+
+})
 
 ```
 
+## Output
+```
+Need to type the below URL in the browser to hot the request
+
+http://127.0.0.1:8000/
+
+```
+
+## Brief About how Web Actually works
+- First the client sends the request and the server sends back response to the browser. This is called client-server architecture.
+- On the client , in the browser we can type the domain name , the browser sends that domain name to DNS server and get the original IP and port.
+- The domain name is not real address of our application. DNS will convert that into correct port and Host and will set back to the browser.Now it got created the connection between client and server via TCP/IP.
+  ![Imag1](https://github.com/NaliniThondapu/angular_practicee/assets/36626668/15cd4607-14af-4483-800b-d146bc9274aa)
+  ![img2](https://github.com/NaliniThondapu/angular_practicee/assets/36626668/f678deb6-c1c4-4908-9185-c20eb423f843)
+  ![img3](https://github.com/NaliniThondapu/angular_practicee/assets/36626668/7a4a8764-49de-470d-8d6b-a8ad3f3a4883)
+![img4](https://github.com/NaliniThondapu/angular_practicee/assets/36626668/5489a16d-a523-4300-898b-6dc4391e51ae)
+![img5](https://github.com/NaliniThondapu/angular_practicee/assets/36626668/7eaac553-d00c-450b-b77f-3e89b6a75016)
+
+- TCP/IP are communication protocls that define how data traverse through the web.
+
+## Example
+
+## createwebserver.js
+
+```
+//to create the webserver in Nodejs first we need to import the http module
+const http = require('http')
 
 
+//Step1 : CREATE A SERVER
+//we need to pass callback function. This call back function will executes everytime
+//a new request hit the server
+//when the new request hits the server this callback function receieves two params
+//request and response objects
+
+//this method returns the server object
+const fs = require('fs')
+const html = fs.readFileSync('./Template/index.html','utf-8');
+const server =  http.createServer((request,response)=>{
+  console.log("A New req is receieved")
+  console.log(request)
+  //we can send back the response to the request
+  // response.end("Hello response from the server")
+
+  //to send the html file as response first we need to read the file using fs module
+  response.end(html)
+
+})
+//STEP2: START THE SERVER
+//It aacepts two params one is port number and the second one is host
+//The third parameter is optional,this call back executes as soon as the server start listening the requests
+server.listen(8000,'127.0.0.1',()=>{
+  console.log("Server has started")
+
+})
+
+```
+
+## style.css
+```
+h3{
+  font-family: 'Courier New', Courier, monospace;
+  color: #232323;
+}
+
+p{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+```
+## script.js
+```
+alert("welcome to Node App")
+
+```
+
+## index.html
+
+```
+<html>
+  <head>
+    <title>Node App</title>
+    <link href="./styles/styles.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <h3>Welcome to NODE APP</h3>
+    <p>
+      This is simple Node application to understand.
+      How the web req and response works in general.
+    </p>
+  </body>
+  <script src="./scripts/script.js"></script>
+</html>
+```
+
+## Output
+
+
+![img6](https://github.com/NaliniThondapu/angular_practicee/assets/36626668/fcee366b-2a9c-4397-abfd-ad865ad4d368)
+
+![img7](https://github.com/NaliniThondapu/angular_practicee/assets/36626668/e03a7492-a43f-488b-b730-f2c7ca69ccea)
+
+## What is Routing
+- Routing defines the way in which the client requests are handled by the application end points.
 
