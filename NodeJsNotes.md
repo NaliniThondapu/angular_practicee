@@ -782,9 +782,79 @@ const replaceHtml = require('./modules/replacehtml')
 - Event emitter emits the named event when something happens in the app.
 - when an event is emitted the event can be picked by eventlistener.These event listeners will tehn fire a call back function that was attached to event listener.
 - This call back function is called as event handler.
+- which ever object inherits the eventemitter class on that object we can emit and listen the events.
+- 
 
-![Uploading 2.png…]()
+![2](https://github.com/NaliniThondapu/angular_practicee/assets/36626668/c7dd07ee-90c8-4e0a-af20-f71aa668cc9a)
+
+## Emitting and handling custom events
+- Inorder to work with events in NodeJS we need to export 'events' package from node. It is core module of NodeJS
+## Example
+```
+//create the event emitter object
+const myemitter = new events.EventEmitter();
+
+//once this is emitted we need to listen and execute the listener
+//on() is nothing but trigger the event
+myemitter.on('usercreated',()=>{
+  console.log("User created")
+})
+
+myemitter.on('usercreated',()=>{
+  console.log("User created in the database")
+})
+
+myemitter.on('usercreated',(id,name)=>{
+  console.log(`User ${name}  created with ${id} in the database`)
+})
+
+//we need to emit this emitter
+// myemitter.emit("usercreated")
+myemitter.emit("usercreated",100,'nalini')
+```
+
+## Output
+```
+PS C:\Nalini\angular_practice\angular_practicee\NodeJs\src\app\NodeJsBasics> node .\userdefinedmodules.js
+User created
+User created in the database
+User nalini  created with 100 in the database
+```
+- In real time we did not create eventemitter like the above. We can create this required emitter in the seperate js.
+- We need to import that in the required Module and need to emit and listen the events.
+## Example
+## user.js
+
+```
+const events = require('events')
+
+module.exports = class extends events.EventEmitter{
+  constructor(){
+    super()
+  }
+}
+```
+
+## userdefinedmodules.js
+```
+//get the event emitter from the user.js module
+const user = require('./modules/user')
+const myemitter = new user();
+
+myemitter.on('usercreated', () => {
+  console.log("User created")
+})
+
+myemitter.on('usercreated', () => {
+  console.log("User created in the database")
+})
+
+myemitter.on('usercreated', (id, name) => {
+  console.log(`User ${name}  created with ${id} in the database`)
+})
 
 
+myemitter.emit("usercreated", 100, 'nalini')
 
+```
 
