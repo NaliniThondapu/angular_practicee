@@ -19,4 +19,9 @@
 - It has multiple phases. In each phase it has its own seperate callback queues.
 - It maily has 4 phases.
 - Expiredtimers , IO tasks and Polling, set Immediate callback, Closed callback
-- 
+- Along with the above four queues , it has two more importtent queues those are "Microtask queue" and "Nexttick queue".
+- The microtask queue stores the callback functions attached to  resolved promises.
+- Where as NextTick queue stores the callback functions attached to process.nexttick functions.
+- These are not related any of the above four phases queues. These are Independent queues.
+- The call backs in these queues will execute immediately after the completion of current phase finishes.
+  
