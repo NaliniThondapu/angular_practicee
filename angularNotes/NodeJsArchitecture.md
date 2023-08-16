@@ -24,7 +24,8 @@
 - Where as NextTick queue stores the callback functions attached to process.nexttick functions.
 - These are not related any of the above four phases queues. These are Independent queues.
 - The call backs in these queues will execute immediately after the completion of current phase finishes.
-- ![10](https://github.com/NaliniThondapu/angular_practicee/assets/36626668/fe6febdf-5690-420f-9f4a-8efdf15a784f)
+  
+![10](https://github.com/NaliniThondapu/angular_practicee/assets/36626668/fe6febdf-5690-420f-9f4a-8efdf15a784f)
 
   
 ![9](https://github.com/NaliniThondapu/angular_practicee/assets/36626668/fa3c35bb-4773-450e-ad13-59a6c8324c48)
