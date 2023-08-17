@@ -1,0 +1,3 @@
+This is a simple text file which we are going to read using NODE JS.
+ This is the Data in the appended file.
+ date created Sun Aug 13 2023 17:43:01 GMT+0530 (India Standard Time)

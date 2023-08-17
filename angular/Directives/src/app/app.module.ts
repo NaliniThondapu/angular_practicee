@@ -15,6 +15,8 @@ import { ApplyColorDirective } from './apply-color.directive';
 import { CustomAttributeDirectiveComponent } from './custom-attribute-directive/custom-attribute-directive.component';
 import { CustomIfDirective } from './custom-if.directive';
 import { CustomStructuralDirectiveComponent } from './custom-structural-directive/custom-structural-directive.component';
+import { HoverDirective } from './hover.directive';
+import { BetterhighlightDirective } from './betterhighlight.directive';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { CustomStructuralDirectiveComponent } from './custom-structural-directiv
     ApplyColorDirective,
     CustomAttributeDirectiveComponent,
     CustomIfDirective,
-    CustomStructuralDirectiveComponent
+    CustomStructuralDirectiveComponent,
+    HoverDirective,
+    BetterhighlightDirective
   ],
   imports: [
     BrowserModule,

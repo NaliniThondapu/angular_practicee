@@ -21,6 +21,7 @@ export class LoginComponent {
     })
   }
 
+
   fsubmit() {
 
     if (this.uname == 'nalini' && this.pwd == 'nalini') {

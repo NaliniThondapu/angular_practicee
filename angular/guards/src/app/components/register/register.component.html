@@ -1,0 +1,13 @@
+<html>
+
+<body>
+  <div>
+    <form [formGroup]="userForm" class="form-group" (ngSubmit)="fsubmit()">
+      FirstName:<input type="text" [(ngModel)]="username" class="form-control" formControlName="firstname"><br><br>
+      LastName:<input type="text" [(ngModel)]="lastname" class="form-control" formControlName="lastname">
+      <button class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</body>
+
+</html>

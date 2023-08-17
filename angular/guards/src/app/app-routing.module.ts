@@ -1,19 +1,44 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UserDetailsComponent } from './components/user-details/user-details.component';
-import { canDeactivateGuard } from './guards/can-deactivate.guard';
-import { PageOneComponent } from './components/page-one/page-one.component';
+import { LoginComponent } from './components/login/login.component';
+import { AboutComponent } from './components/about/about.component';
+import { UsersComponent } from './components/users/users.component';
+import { authGuard } from './guards/auth.guard';
+import { WelcomeComponent } from './components/welcome/welcome.component';
+import { RegisterComponent } from './components/register/register.component';
+import { candeactivateGuard } from './guards/candeactivate.guard';
+
 
 const routes: Routes = [
   {
-    path: '',
-    component: UserDetailsComponent,
-    canDeactivate: [canDeactivateGuard]
+    path:'',
+    redirectTo:'register',
+    pathMatch:'full'
+
   },
   {
-    path: 'page-one',
-    component: PageOneComponent
+    path: 'home',
+    component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canDeactivate:[candeactivateGuard]
+  },
+  {
+    path: 'about',
+    component: AboutComponent
+  },
+  {
+    path: 'users',
+    component: UsersComponent,
+    canActivate:[authGuard]
+  },
+  {
+    path: 'welcome',
+    component: WelcomeComponent
   }
+
 ];
 
 @NgModule({

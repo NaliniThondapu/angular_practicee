@@ -1,0 +1,24 @@
+<h1 class="text-center">Users DashBoard</h1>
+<div *ngIf=" users.length >0 else errorMessage">
+  <table class="table table-boardered">
+    <tr class="bg-primary">
+      <th>ID</th>
+      <th>Name</th>
+      <th>User Name</th>
+      <th>Email</th>
+      <th>City</th>
+    </tr>
+    <tr *ngFor='let user of users'>
+      <td><a [routerLink]="['/user',user.id]">{{user.id}}</a></td>
+      <td>{{user.name}}</td>
+      <td>{{user.username}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.address.city}}</td>
+    </tr>
+  </table>
+
+</div>
+
+<ng-template #errorMessage>
+  <p class='alert alert-danger text-center'>{{errorMessage}}</p>
+</ng-template>
