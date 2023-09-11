@@ -204,6 +204,7 @@ export class DataEventsComponent {
 
 ## Event Binding
 - For event binding we need use **()** braces instead of **[]** like **(click)**
+- Eventbinding allows us to bind webpage events to a components property or methods. Using event binding we can pass data from view to component.
 
 ```
 <!-- event binding UI to component-->
