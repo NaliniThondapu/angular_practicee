@@ -1,5 +1,5 @@
 const http = require('http')
-// const fs = require('fs')
+const fs = require('fs')
 // const url = require('url')
 // const html = fs.readFileSync('./Template/index.html', 'utf-8');
 // //JSON parse method will convert the JSON into java script object
@@ -68,13 +68,13 @@ const http = require('http')
 
 // })
 
-const fs = require('fs')
-const server = http.createServer()
-//START THE SERVER
-server.listen(8000, '127.0.0.1', () => {
-  console.log("Server has started")
+// const fs = require('fs')
+// const server = http.createServer()
+// //START THE SERVER
+// server.listen(8000, '127.0.0.1', () => {
+//   console.log("Server has started")
 
-})
+// })
 
 //because of this approach the NODE will read the entire fiel and keep that in memory.It causes the performence issue.
 // server.on('request', (req, res) => {
@@ -118,3 +118,53 @@ server.listen(8000, '127.0.0.1', () => {
 //     //This method is avalible on only readable stream we can not apply on the writable stream.
 //     rs.pipe(res)
 // })
+
+//EVENT LOOP PRACTICE
+// console.log("Program has started")
+
+// //STORED IN-FIRSTPHASE
+// setTimeout(() => {
+//   console.log("Timer callback executed")
+// }, 0);
+
+// //STORED IN-SECONDPHASE , this is IO task
+// //The call back function related to this is not pushed immediately
+// //Function will pushed to second phase only when file read got completed
+// fs.readFile('./files/largefile.txt', () => {
+//   console.log("File read completed")
+// })
+
+// //STORED IN-3RD PHASE
+// setImmediate(() => {
+//   console.log("setImmediate callback executed")
+// })
+
+// console.log("Program has completed")
+
+
+// Second example
+// In this example we are added all the code inside the readFile
+console.log("Program has started")
+
+//STORED IN-SECONDPHASE
+fs.readFile('./files/largefile.txt', () => {
+  console.log("File read completed")
+
+  //STORED IN-FIRSTPHASE
+  setTimeout(() => {
+    console.log("Timer callback executed")
+  }, 0);
+
+  //STORED IN-3RD PHASE
+  setImmediate(() => {
+    console.log("setImmediate callback executed")
+  })
+
+  //This callback will be pushed to nextTick queue
+  //which will execute if the current phase got finished its callback function executed
+  process.nextTick(()=>{
+    console.log("process.nexttick callback executed")
+  })
+
+})
+console.log("Program has completed")
