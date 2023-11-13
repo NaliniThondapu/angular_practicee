@@ -1,14 +1,15 @@
 # Directives
+- Directives are simply instructions to the DOM.
 - A directive is an attribute that enhances the capability of HTML element.
 - Directives help to interact with th HTML DOM and perform the changes directly.
-- There are 3 types of directives.
+- There are 2 types of directives.
 
 ## Types
-- Component
-- Structural(*ngfor,*ngif,*ngswitch....)
-- Attribute(ngstyle,ngclass)
+- Structural(*ngfor,*ngif,*ngswitch....) -- Changes the view of a webpage by adding or removing DOM elements to the webpage.
+- Attribute(ngstyle,ngclass)-- Used like an attribute on a existing webpage element to change its look and behaviour.
 
 ## Structural Directives
+- Changes the view of a webpage by adding or removing DOM elements to the webpage.
 ## ng-template
 - It is used to hold the template content that will be used by Structural directives.
 - Those directives can add and remove copies of the template content based on their own logic.

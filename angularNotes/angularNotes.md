@@ -64,6 +64,8 @@ ng g m orders --route orders --module app.module -- generate the module orders ,
 - **app.modules.ts**, we can import or export the modules required for our application.
 
 ## component
+- Acomponent is a piece of user interface.
+- Angular is a component based java script application for building client side application.
 - Every component will contain 4 files html,css,component and spec file.
 
 ## Router outlet
@@ -202,6 +204,7 @@ export class DataEventsComponent {
 
 ## Event Binding
 - For event binding we need use **()** braces instead of **[]** like **(click)**
+- Eventbinding allows us to bind webpage events to a components property or methods. Using event binding we can pass data from view to component.
 
 ```
 <!-- event binding UI to component-->
