@@ -109,10 +109,7 @@ server.listen(8000,'127.0.0.1',()=>{
 
 ## How Request and Response Works
 - If the response html file has any other css or script files are included , then internally the client send the requests to get the files and finally build the response htnl basing on the consolidated response.
-
   ![Screenshot 2023-11-22 194628](https://github.com/NaliniThondapu/angular_practicee/assets/36626668/5bb28aad-6ffd-4762-894c-6aa6bd2a1c44)
-
-
 ```
 /* ---- CREATE A SIMPLE WEBSERVER ----*/
 
