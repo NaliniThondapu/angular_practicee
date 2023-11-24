@@ -178,9 +178,8 @@ server.listen(8000, '127.0.0.1', () => {
 
 ## Setting Headers For Response
 - The headers of response contains the some additional information like type of response, time , date etc.
-
-  ```
-  const server = http.createServer((req, res) => {
+```
+ const server = http.createServer((req, res) => {
     //The below req.url method will returns the path  after the domain eg: www.xyz.com/home it returns /home
     let path = req.url;
     if (path == '/' || path.toLocaleLowerCase() == '/home') {
@@ -213,14 +212,10 @@ server.listen(8000, '127.0.0.1', () => {
         res.end(html.replace('{{%CONTENT%}}','ERROR 404: PAGE NOT FOUND'))
     }
 })
-
-
-
-
 //STEP3 : START THE SERVER
 server.listen(8000, '127.0.0.1', () => {
     console.log('server has started!')
 })
-
 ```
+
 
