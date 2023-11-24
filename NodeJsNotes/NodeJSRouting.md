@@ -175,3 +175,52 @@ server.listen(8000, '127.0.0.1', () => {
     console.log('server has started!')
 })
 ```
+
+## Setting Headers For Response
+- The headers of response contains the some additional information like type of response, time , date etc.
+
+  ```
+  const server = http.createServer((req, res) => {
+    //The below req.url method will returns the path  after the domain eg: www.xyz.com/home it returns /home
+    let path = req.url;
+    if (path == '/' || path.toLocaleLowerCase() == '/home') {
+        //set the staus code in the response as a header
+        res.writeHead(200,{
+            'Content-Type' :'text/html',
+            'my-header': 'Hello , World'
+        });
+        //here we are replacing the placeholder of HTMl with required information
+        res.end(html.replace('{{%CONTENT%}}','You are in Home Page'))
+    } else if (path.toLocaleLowerCase() == '/about') {
+        res.writeHead(200,{
+            'Content-Type' :'text/html',
+            'my-header': 'Hello , World'
+        });
+        res.end(html.replace('{{%CONTENT%}}','You are in About Page'))
+    } else if(path.toLocaleLowerCase() == '/contact'){
+        res.writeHead(200,{
+            'Content-Type' :'text/html',
+            'my-header': 'Hello , World'
+        });
+        res.end(html.replace('{{%CONTENT%}}','You are in contact Page'))
+    }else{
+        res.writeHead(404,{
+            'Content-Type' :'text/html',
+            'my-header': 'Hello , World'
+        });
+        //this is the default route if user enters the wrong path or unmanaged path
+        //If this is not mention our applications will hang
+        res.end(html.replace('{{%CONTENT%}}','ERROR 404: PAGE NOT FOUND'))
+    }
+})
+
+
+
+
+//STEP3 : START THE SERVER
+server.listen(8000, '127.0.0.1', () => {
+    console.log('server has started!')
+})
+
+```
+
