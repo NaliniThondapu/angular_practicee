@@ -311,3 +311,207 @@ server.listen(8000, '127.0.0.1', () => {
     console.log('server has started!')
 })
 ```
+
+## Creating a reusable function
+
+## app.js
+
+```
+/STEP1 : Import the http package
+const http = require("http")
+const fs = require("fs")
+const url = require("url")
+
+//We want to send the html file as the response
+//First we need to read the file using fs module
+const html = fs.readFileSync('./template/index.html', 'utf-8')
+
+//Below JSON parse method will convert JSOn objects into javascript objects
+let products = JSON.parse(fs.readFileSync("./data/products.json", 'utf-8'));
+let prodhtml = fs.readFileSync('./template/products.html', 'utf-8')
+let prodDetailsHtml = fs.readFileSync('./template/product-details.html', 'utf-8')
+
+
+//replace the above logic with the function
+function replaceHtml(template, product) {
+    let output = template.replace("{{%IMAGE%}}", product.productImage)
+    output = output.replace('{{%NAME%}}', product.name);
+    output = output.replace('{{%MODELNAME%}}', product.modeName);
+    output = output.replace('{{%MODELNO%}}', product.modelNumber);
+    output = output.replace('{{%CAMERA%}}', product.camera);
+    output = output.replace('{{%PRICE%}}', product.price);
+    output = output.replace('{{%COLOR%}}', product.color);
+    output = output.replace('{{%ID%}}', product.id);
+    output = output.replace('{{%ROM%}}', product.ROM);
+    output = output.replace('{{%DESC%}}', product.Description);
+    return output;
+}
+
+//SEND HTML RESPONSES FOR DIFFERENT ROUTES
+
+const server = http.createServer((req, res) => {
+    //parse the url to get the query parameters
+    // let x = url.parse(req.url, true);
+    // console.log(x)
+
+    //in the below path is alias name for pathname
+    let { query, pathname: path } = url.parse(req.url, true);
+
+    if (path.toLocaleLowerCase() === '/products') {
+        if (!query.id) {
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+            let prodhtmlArray = products.map((prod) => {
+                return replaceHtml(prodhtml, prod)
+            })
+            res.end(html.replace('{{%CONTENT%}}', prodhtmlArray.join(',')))
+        } else {
+            //get the product from the array by id
+            let product = products[query.id];
+            res.end(html.replace('{{%CONTENT%}}', replaceHtml(prodDetailsHtml, product)))
+            // res.end("You are In Product Page of ID = " + query.id)
+        }
+    } else {
+        res.writeHead(404, {
+            'Content-Type': 'text/html',
+            'my-header': 'Hello , World'
+        });
+        //this is the default route if user enters the wrong path or unmanaged path
+        //If this is not mention our applications will hang
+        res.end(html.replace('{{%CONTENT%}}', 'ERROR 404: PAGE NOT FOUND'))
+    }
+})
+
+//STEP3 : START THE SERVER
+server.listen(8000, '127.0.0.1', () => {
+    console.log('server has started!')
+})
+```
+
+## product-details.html
+
+```
+<div class="page-content">
+    <div class="product-page">
+	<div class="product-desc">
+		<div class="product-desc-image">
+			<img src={{%IMAGE%}} width="280" height="320">
+		</div>
+			<div class="product-details-info">
+				<h1>{{%NAME%}}</h1>
+				<h2 style="color: green;">${{%PRICE%}}</h2>
+				<div class="product-desc-details">
+					<h3">Product Details</h3>
+					<p class="product-desc-p">{{%SIZE%}}</p>
+					<p class="product-desc-p">{{%CAMERA%}}</p>
+					<p class="product-desc-p"><b>Model Number</b>{{%MODELNO%}}</p>
+					<p class="product-desc-p"><b>Model Name</b>{{%MODELNAME%}}</p>
+					<p class="product-desc-p"><b>ROM</b>{{%ROM%}} GB</p>
+				</div>
+				<div class="product-details-desc">
+					<h3>Product Description</h3>
+					<p class="product-desc-p">
+						{{%DESC%}}
+					</p>
+				</div>
+			</div>
+			<div>
+				<a href="/products" class="btn-back">Back</a>
+			</div>
+		</div>
+	</div>
+ </div>
+```
+
+## Creating a Custom Module
+- Each script file(.js file) in NodeJS is a seperate module.
+- We have CORE modules and user defined modules.
+- The modules which are provided by NodeJs are core modules.
+  ## Eg
+```
+const http = require("http")
+const fs = require("fs")
+const url = require("url")
+```
+- The modules which were created by developer are user defined modules or custom modules.
+- If we want to use this in other js files, first we need to import and use like below
+
+```
+//import our custom module to use that
+const replaceHtml = require("./Modules/replacehtml")
+```
+  
+## Example
+## replacehtml.js
+```
+module.exports = function replaceHtml(template, product) {
+    let output = template.replace("{{%IMAGE%}}", product.productImage)
+    output = output.replace('{{%NAME%}}', product.name);
+    output = output.replace('{{%MODELNAME%}}', product.modeName);
+    output = output.replace('{{%MODELNO%}}', product.modelNumber);
+    output = output.replace('{{%CAMERA%}}', product.camera);
+    output = output.replace('{{%PRICE%}}', product.price);
+    output = output.replace('{{%COLOR%}}', product.color);
+    output = output.replace('{{%ID%}}', product.id);
+    output = output.replace('{{%ROM%}}', product.ROM);
+    output = output.replace('{{%DESC%}}', product.Description);
+    return output;
+}
+```
+
+## app.js
+
+```
+//STEP1 : Import the http package
+const http = require("http")
+const fs = require("fs")
+const url = require("url")
+
+//import our custom module to use that
+const replaceHtml = require("./Modules/replacehtml")
+
+//We want to send the html file as the response
+//First we need to read the file using fs module
+const html = fs.readFileSync('./template/index.html', 'utf-8')
+
+//Below JSON parse method will convert JSOn objects into javascript objects
+let products = JSON.parse(fs.readFileSync("./data/products.json", 'utf-8'));
+let prodhtml = fs.readFileSync('./template/products.html', 'utf-8')
+let prodDetailsHtml = fs.readFileSync('./template/product-details.html', 'utf-8')
+
+const server = http.createServer((req, res) => {
+    //parse the url to get the query parameters
+    // let x = url.parse(req.url, true);
+    // console.log(x)
+
+    //in the below path is alias name for pathname
+    let { query, pathname: path } = url.parse(req.url, true);
+    if (path.toLocaleLowerCase() === '/products') {
+        if (!query.id) {
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+            let prodhtmlArray = products.map((prod) => {
+                return replaceHtml(prodhtml, prod)
+            })
+            res.end(html.replace('{{%CONTENT%}}', prodhtmlArray.join(',')))
+        } else {
+            //get the product from the array by id
+            let product = products[query.id];
+            let productInfo = replaceHtml(prodDetailsHtml, product);
+            res.end(html.replace('{{%CONTENT%}}', productInfo))
+            // res.end("You are In Product Page of ID = " + query.id)
+        }
+    } else {
+        res.writeHead(404, {
+            'Content-Type': 'text/html',
+            'my-header': 'Hello , World'
+        });
+        //this is the default route if user enters the wrong path or unmanaged path
+        //If this is not mention our applications will hang
+        res.end(html.replace('{{%CONTENT%}}', 'ERROR 404: PAGE NOT FOUND'))
+    }
+})
+//STEP3 : START THE SERVER
+server.listen(8000, '127.0.0.1', () => {
+    console.log('server has started!')
+})
+
+```
