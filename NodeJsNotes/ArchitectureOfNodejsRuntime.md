@@ -61,4 +61,80 @@
   - Becareful with JSON which has a large number of JSON objects.
   - Do not use too complex regular expressions inside the callback functions.
   
+## Nodejs event loop practice
+## app.js
 
+```
+/* EVENT LOOP PRACTICE*/
+const fs = require("fs")
+//FIRST ALL INDEPENDENT STMTS WILL EXECUTE AND THEN EVENT LOOP WILL STARTS
+console.log("Program has started")
+
+//STORED IN 1ST-PHASE
+setTimeout(() => {
+    console.log("Timer call back got executed")
+}, 0)
+
+//STORED IN 2ND PHASE
+//ONCE THE FILE READ COMPLETED AND THEN ONLY THE CALL BACK FUNCTION WILL PUSH TO THE 2ND PHASE
+fs.readFile("./files/input.txt",()=>{
+    console.log("FIle Read Completed")
+})
+
+//STORED in 3rd PHASE
+setImmediate(()=>{
+    console.log("Set Immediate call back executed")
+})
+
+console.log("program has completed")
+```
+
+## output
+
+```
+Program has started
+program has completed
+Timer call back got executed
+Set Immediate call back executed
+FIle Read Completed
+```
+## Example2
+
+```
+// EXAMPLE2
+console.log("Program has started")
+
+//STORED IN 2ND PHASE
+//ONCE THE FILE READ COMPLETED AND THEN ONLY THE CALL BACK FUNCTION WILL PUSH TO THE 2ND PHASE
+fs.readFile("./files/input.txt", () => {
+    console.log("FIle Read Completed")
+
+    //STORED IN 1ST-PHASE
+    setTimeout(() => {
+        console.log("Timer call back got executed")
+    }, 0)
+
+    //STORED in 3rd PHASE
+    setImmediate(() => {
+        console.log("Set Immediate call back executed")
+    })
+
+  //CREATE THE CALLBACK FUNCTION OF NEXTTICK QUEUE
+    process.nextTick(()=>{
+        console.log("process.nexttick callback executed")
+    })
+})
+
+console.log("program has completed")
+```
+
+## Output
+
+```
+Program has started
+program has completed
+FIle Read Completed
+process.nexttick callback executed
+Set Immediate call back executed
+Timer call back got executed
+```
