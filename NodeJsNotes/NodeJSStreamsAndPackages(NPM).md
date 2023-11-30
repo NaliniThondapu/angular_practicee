@@ -79,7 +79,7 @@ server.on("request", (req, res) => {
 
 
 ## Use of PIPE() Method
-- This pipe method allows us to pipe the output of a readable stream write into the input of a readable stream.
+- This pipe method allows us to pipe the output of a readable stream write into the input of a writable stream.
 - Pipe method will always available for readable streams not for writable streams.
 - This pipe method fixes the back pressure issue.
 
@@ -116,4 +116,59 @@ npm init
 
 ## Types of Packages and Installs
 - Packages can be classified into two types one is "regular" depedency and other one developer dependencies
-- 
+- The package is called Regular dependency which we can depend on that to work our application smoothly.
+- For example "expressjs" is one of package is required to work DB operations in our application.
+- The package is calles Developer dependencies, which is used only for development purpose like Codeformatter etc. These are not required to run our application.
+- If we want to install a package to our application need to run the below command
+
+## Install Regular Dependency Package
+  ```
+  //here express is package name if we did not any version while install it installs latest version
+  npm install express
+  ```
+
+## Install Dev dependency Package
+- nodemon is a package is used to auto restart the application when any code changes done.
+
+```
+npm install  nodemon --save-dev
+```
+
+  ## package.json
+  ```
+{
+  "name": "node-js-basic",
+  "version": "1.0.0",
+  "description": "learcn basics of Nodejs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nalini T",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
+```
+
+## Types of Package Installs
+- we have two types of package installs
+- Local and Global installs. Local package means the packages which are available to that perticualr speific folder or project.We can not from other folder or project.
+- Where as global we can access from any of the folder or the Porject.
+- To istall a package globally need to run the command like below.
+
+```
+npm install -g nodemon --save-dev
+```
+
+- If we run the below command , it automatically refelct the changes and restart the server.
+
+```
+nodemon app.js
+```
+
+
