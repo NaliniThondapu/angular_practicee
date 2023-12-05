@@ -1,3 +1,103 @@
+## LazyLoading vs Early Loading
+- Eager loading is the default loading strategy in Angular. In this approach, all modules are loaded when the application starts, regardless of whether they are immediately needed or not. This can lead to larger initial bundle sizes, which may impact the application’s loading time.
+- Lazy loading is a technique where modules are loaded on-demand, as and when they are needed. This can significantly reduce the initial bundle size and improve the application’s loading speed, especially for large applications.
+- for lazy loading we can use the load childern propertu in routing module.
+
+  ## Example of lazy Loading Module
+  - create the admin module using the below command
+    ```
+    ng g m admin --routing
+    ```
+  - Now we have two modules one is "Admin" and the other one is "App" module is default module by angular.
+  - we have to load the admin module related content when ever is needed that is lazy loading.
+## admin-routing.mosule.ts
+```
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import { ListComponent } from './list/list.component';
+
+const routes: Routes = [
+  {
+    path:'login',
+    component:LoginComponent
+  },
+  {
+    path:'list',
+    component:ListComponent
+
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class AdminRoutingModule { }
+
+```
+## app-routing.module.ts
+
+```
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  {
+    path:'admin',
+    loadChildren:()=>import('./admin/admin.module').then(mod=>mod.AdminModule)
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+```
+## lazy loading component
+- If we want load the component lazily we have to achieve this by async and await.
+- For this we need "ViewContainerref"  and "ComponentFactoryResolver"
+- By using these we can create the component object when click the button it self
+
+## app.component.ts
+```
+import { Component, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'LazyLoading';
+
+  constructor(private vcr: ViewContainerRef, private cfr: ComponentFactoryResolver) {
+
+  }
+
+  async loadAdmin() {
+    this.vcr.clear()
+    const { AdminlistComponent } = await import('./components/adminlist/adminlist.component')
+    this.vcr.createComponent(
+      this.cfr.resolveComponentFactory(AdminlistComponent)
+    )
+  }
+
+}
+
+```
+
+## app.component.html
+```
+<h1>Lazy Loading</h1>
+<h2>Admin Links</h2>
+<button (click)="loadAdmin()">Load Admin ListComponent</button>  a
+<router-outlet></router-outlet>
+
+```
+ 
 ## Routing And Navigation 
 -  **Check the videos of Mar first and sixth for the below conecpts**. Below are the concepts of Routing and navigation. Cannot able to write the notes for some points. In case of doubts need to check the videos.
 - Routing in a NutShell
