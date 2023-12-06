@@ -162,6 +162,15 @@ app.get('/api/v1/movies/:id', (req, res) => {
     let movie = movies.find(movie => movie.id === movieId)
     console.log(movie)
 
+//SEND THE ERROR MESSAGE BACK IF MOVIE NOT HAVE
+   if(!movie){
+        return res.status(404).json({
+            status:"Fail",
+            message:`Movie with ${movieId} not Found`
+        })
+    }
+
+    //SEND THE MOVIE IN THE RESPONSE
     res.status(200).json({
         status: "success",
         data: {
