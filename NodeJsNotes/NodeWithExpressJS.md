@@ -193,3 +193,43 @@ app.listen(port, () => {
 ## PUT vs Patch Request
 - Put is a method of modifying resouce where the client send the data that updates the entire resource.If you want to update the only single filed need to send the entire object in the request body.
 - Patch ia a method of modifying resources where the client sends the partial data that is to be updated without modifying the entire data.In this request what ever fields needs to be updated needs to send only those in the request body.
+
+## Example
+
+```
+//HANDLE PATCH METHOD
+app.patch('/api/v1/movies/:id', (req, res) => {
+    const id = req.params.id * 1;
+    let movieToUpdate = movies.find(el => el.id === id)
+    let index = movies.indexOf(movieToUpdate)
+
+    if (!movieToUpdate) {
+        return res.status(404).json({
+            status: "Fail",
+            message: `Movie with ${id} not Found`
+        })
+    }
+
+    //we are using object.assign() method two merge two objects
+    //If the properties are diff in the both two objects will create the new one with both two object keys and values
+    //If any of the properties are common the first object values replaced with second object values
+    Object.assign(movieToUpdate, req.body)
+
+    //updat the movie in the array
+    movies[index] = movieToUpdate;
+    console.log(movies[index])
+
+    //need to update the movie in the json file
+    //first we need to convert javascript object to JSON and then write
+    fs.writeFile('./data/movies.json',JSON.stringify(movies),(err)=>{
+        res.status(201).json({
+            status: "success",
+            data: {
+                movie: movieToUpdate
+            }
+        })
+
+    })
+
+})
+```
