@@ -187,3 +187,9 @@ app.listen(port, () => {
     console.log("Server has started")
 })
 ```
+
+## Handle Patch Request
+
+## PUT vs Patch Request
+- Put is a method of modifying resouce where the client send the data that updates the entire resource.If you want to update the only single filed need to send the entire object in the request body.
+- Patch ia a method of modifying resources where the client sends the partial data that is to be updated without modifying the entire data.In this request what ever fields needs to be updated needs to send only those in the request body.
