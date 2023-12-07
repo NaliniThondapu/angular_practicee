@@ -233,3 +233,223 @@ app.patch('/api/v1/movies/:id', (req, res) => {
 
 })
 ```
+
+## Handle Delete Request
+
+```
+//Handle Delete Request
+app.delete('/api/v1/movies/:id', (req, res) => {
+    let id = req.params.id * 1;
+    const movieTodelete = movies.find(el => el.id === id);
+    if (!movieTodelete) {
+        return res.status(404).json({
+            status: "Fail",
+            message: `Movie with ${id} not Found to delete`
+        })
+    }
+
+    let index = movies.indexOf(movieTodelete);
+
+    //to delete the element from the array we need to use splice method
+    //it has two args index and the number of elements we need to delete
+    movies.splice(index, 1);
+
+    //need to update the movie in the json file
+    //first we need to convert javascript object to JSON and then write
+    fs.writeFile('./data/movies.json', JSON.stringify(movies), (err) => {
+        res.status(204).json({
+            status: "success",
+            message:'Movie Deleted'
+        })
+
+    })
+
+})
+```
+
+## Refactored code of all the above requests
+- Please check the code for notes and questions
+
+## Code
+```
+//IMPORT PACKAGE
+//The express package returns a function need to call explicitly to get the object
+const express = require('express')
+let app = express()
+const fs = require("fs")
+//First Read the data from the file and need to convert into Java script object by using JSON.parse
+let movies = JSON.parse(fs.readFileSync("./data/movies.json"))
+
+//CREATE THE ROUTE HANDLER FUNCTIONS
+const getAllMovies = (req, res) => {
+    //we need to format to json json first the movies data and then sendit
+    res.status(200).json(
+        {
+            status: "success",
+            count: movies.length,
+            //the below format means we are envolping the json data
+            data: {
+                movies: movies
+            }
+        }
+    )
+
+}
+
+
+//GET Request  - /api/v1/movies/id
+//Get movie by Id
+//the Url may have multiply route params
+//in the below ap req id,name and x route params
+//:x? this means , x parameter is optional
+// app.get('/api/v1/movies/:id/:name/:x?',(req,res)=>{
+const getMovie = (req, res) => {
+    //we have to know which id is entered the user in the route param to get that perticular movie
+    //The req object , it has property called "params" and that params is an object it has all the route parameters
+    //the id value is stored as object and need to convert into integer
+    console.log(req.params);
+    //below  + operatir will convert the string into integer
+    const movieId = +req.params.id;
+    console.log(movieId)
+
+    //FIND THE MOVIE BASED ON ID
+    let movie = movies.find(movie => movie.id === movieId)
+    console.log(movie)
+
+    if (!movie) {
+        return res.status(404).json({
+            status: "Fail",
+            message: `Movie with ${movieId} not Found`
+        })
+    }
+
+    //SEND THE MOVIE IN THE RESPONSE
+    res.status(200).json({
+        status: "success",
+        data: {
+            movie: movie
+
+        }
+    })
+}
+
+// get the middleware to pass the request body
+//this "express.json()" middleware will add the request body to the request object
+//A middleware is just a function that can modify the incoming request data 
+app.use(express.json())
+
+const createMovie = (req, res) => {
+
+    //POST request means we have to send the body object
+    //but the req parameter does not have body parameter
+    //The solution is we need to use middleware to send the request body
+    console.log(req.body);
+
+    const newId = movies[movies.length - 1].id + 1;
+
+    //the below assign method will create the new object by merging two existing Objects together
+    const newMovie = Object.assign({ id: newId }, req.body)
+    //the above new movie need to Movies array
+    movies.push(newMovie);
+    //write the newMovie to the file
+    //first we need to convert javascript object to JSON and then write
+    fs.writeFile('./data/movies.json', JSON.stringify(movies), (err) => {
+        res.status(201).json({
+            status: "success",
+            data: {
+                movie: newMovie
+            }
+        })
+
+    })
+    // res.send("New Movie got created")
+
+}
+
+const updateMovie = (req, res) => {
+    const id = req.params.id * 1;
+    let movieToUpdate = movies.find(el => el.id === id)
+    let index = movies.indexOf(movieToUpdate)
+
+    if (!movieToUpdate) {
+        return res.status(404).json({
+            status: "Fail",
+            message: `Movie with ${id} not Found`
+        })
+    }
+
+    //we are using object.assign() method two merge two objects
+    //If the properties are diff in the both two objects will create the new one with both two object keys and values
+    //If any of the properties are common the first object values replaced with second object values
+    Object.assign(movieToUpdate, req.body)
+
+    //updat the movie in the array
+    movies[index] = movieToUpdate;
+    console.log(movies[index])
+
+    //need to update the movie in the json file
+    //first we need to convert javascript object to JSON and then write
+    fs.writeFile('./data/movies.json', JSON.stringify(movies), (err) => {
+        res.status(201).json({
+            status: "success",
+            data: {
+                movie: movieToUpdate
+            }
+        })
+
+    })
+}
+
+const deleteMovie = (req, res) => {
+    let id = req.params.id * 1;
+    const movieTodelete = movies.find(el => el.id === id);
+    if (!movieTodelete) {
+        return res.status(404).json({
+            status: "Fail",
+            message: `Movie with ${id} not Found to delete`
+        })
+    }
+
+    let index = movies.indexOf(movieTodelete);
+
+    //to delete the element from the array we need to use splice method
+    //it has two args index and the number of elements we need to delete
+    movies.splice(index, 1);
+
+    //need to update the movie in the json file
+    //first we need to convert javascript object to JSON and then write
+    fs.writeFile('./data/movies.json', JSON.stringify(movies), (err) => {
+        res.status(204).json({
+            status: "success",
+            message: 'Movie Deleted'
+        })
+
+    })
+
+}
+
+//handle GET request
+//GET ALL MOVIES
+// app.get('/api/v1/movies', getAllMovies)
+// //GET MOVIE BY ID
+// app.get('/api/v1/movies/:id', getMovie)
+// //CREATE MOVIE
+// //Handle POST Request
+// //we can able to create the new movie object
+// app.post('/api/v1/movies', createMovie)
+// //UPDATE MOVIE : HANDLE PATCH METHOD
+// app.patch('/api/v1/movies/:id',updateMovie)
+// //Handle Delete Request
+// app.delete('/api/v1/movies/:id', deleteMovie)
+
+
+//WE CAN CALL THE ABOVE CODE LIKE BELOW AS WELL
+app.route('/api/v1/movies').get(getAllMovies).post(createMovie)
+app.route('/api/v1/movies/:id').get(getMovie).patch(updateMovie).delete(deleteMovie)
+
+//create the server
+const port = 3000;
+app.listen(port, () => {
+    console.log("Server has started")
+})
+```
